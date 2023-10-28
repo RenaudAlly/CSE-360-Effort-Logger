@@ -12,7 +12,7 @@ Members:
 - Types
     - `feat`: Feature being added to the codebase
         - (optional usage of "!" to bring attention too possible breaking change)
-    - `fix`: a batch for a bug within the code base 
+    - `fix`: a patch for a bug within the code base 
     - `doc`: making edits to documentation
 
 ##### Example
