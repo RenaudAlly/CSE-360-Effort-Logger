@@ -7,7 +7,7 @@ Members:
 - Arjun Khetan
 - Meshach Samuel (Sam)
 
-### Commit guidelines quick refrence
+### Commit Convensions quick refrence
 `<type>[optionals scope]: <description>`
 - Types
     - `feat`: Feature being added to the codebase
@@ -15,7 +15,7 @@ Members:
     - `fix`: a patch for a bug within the code base 
     - `doc`: making edits to documentation
 
-##### Example
+##### Example commit
 
 ```bash
 $git add *
