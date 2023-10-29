@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.Controller">
+   <children>
+         <Label fx:id="userIDLabel" layoutX="109.0" layoutY="80.0" text="userID" />
+      <Label fx:id="hoursWorked" layoutX="109.0" layoutY="140.0" text="hoursWorked" />
+      <Label fx:id="defectsInLogs" layoutX="109.0" layoutY="200.0" text="defects" />
+      <Label fx:id="logsProduced" layoutX="109.0" layoutY="260.0" text="logsProduced" />
+      <Button fx:id="goBackToSelect" layoutX="446.0" layoutY="358.0" mnemonicParsing="false" onAction="#ShowHomePage" text="Go back to previous" />
+   </children>
+</AnchorPane>

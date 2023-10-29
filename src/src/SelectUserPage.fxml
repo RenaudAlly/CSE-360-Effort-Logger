@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.Controller">
+   <children>
+      <Button fx:id="showDataButton" layoutX="260.0" layoutY="216.0" mnemonicParsing="false" onAction="#ShowDataClicked" text="Show Data" />
+      <Label layoutX="227.0" layoutY="108.0" text="Choose an example user" />
+      <TextField fx:id="selectedUser" layoutX="227.0" layoutY="160.0" promptText="Please enter a user" />
+   </children>
+</AnchorPane>
