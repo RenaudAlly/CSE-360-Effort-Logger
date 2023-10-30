@@ -22,7 +22,6 @@ public class ViewPages extends Application implements EventHandler<ActionEvent> 
 	Button employeeButton;
 	Button supervisorButton;
 	Button submitButton;
-	Button approveButton;
 	Button rejectButton;
 	
 	public static void main(String[] args) {
@@ -34,6 +33,9 @@ public class ViewPages extends Application implements EventHandler<ActionEvent> 
 		
 		submitButton = new Button();
 		submitButton.setText("Submit");
+		
+		rejectButton = new Button();
+		rejectButton.setText("Reject");
 		
 		// Main Window		
 		window = primaryStage;
@@ -75,7 +77,8 @@ public class ViewPages extends Application implements EventHandler<ActionEvent> 
 		employeeScene = new Scene(employeeView, 500, 500);
 		
 		// Supervisor Page
-		BorderPane root = new BorderPane();
+		VBox supervisorView = new VBox(15);
+		supervisorView.setAlignment(Pos.CENTER);
 		
 		TableView table = new TableView<Person>();
 		TableColumn firstNameColumn = new TableColumn<Person, String>("First Name");
@@ -97,9 +100,16 @@ public class ViewPages extends Application implements EventHandler<ActionEvent> 
 		table.getItems().add(new Person("Adam", "Bonnet", 6));
 		table.getItems().add(new Person("Sawyer", "Kesti", 9));
 		
-		root.setCenter(table);
+		// Reject Button
+		rejectButton.setOnAction(new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				table.getItems().removeAll(table.getSelectionModel().getSelectedItem());
+			}
+		});
 		
-		supervisorScene = new Scene(root, 500, 300);
+		supervisorView.getChildren().addAll(table, rejectButton);
+		
+		supervisorScene = new Scene(supervisorView, 500, 300);
 		
 		// Final Rendering		
 		window.setScene(mainScene);
