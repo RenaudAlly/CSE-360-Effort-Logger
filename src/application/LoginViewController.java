@@ -26,7 +26,7 @@ public class LoginViewController {
 		login.setPassword(passwordField.getText());
 
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		scene = new Scene(fxmlLoader.load(), 900, 600);
+		scene = new Scene(fxmlLoader.load());
 		stage.setTitle("Login Info");
 
 		DisplayViewController control = fxmlLoader.getController();
