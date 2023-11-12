@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 
 public class ReportGeneratorViewController {
 	@FXML
@@ -16,16 +17,26 @@ public class ReportGeneratorViewController {
 	@FXML
 	private Label reportSubmissionText;
 	
+	private String validUsername;
+	
+	public void captureLogin(Login previousLogin) {
+		this.validUsername = previousLogin.getName();
+	}
+	
 	public void enteredEmployeeID(ActionEvent event) throws IOException {
-		employeeIDConfirmation.setText("You have entered the correct employee ID");
+		// comparing text field content with initial user name
+		if (validUsername.equals(employeeID.getText())) {
+			employeeIDConfirmation.setText("You have entered the correct employee ID");
+			employeeIDConfirmation.setTextFill(Color.BLACK);
+		}
 	}
 	
 	public void createReport(ActionEvent event) throws IOException {
-		reportGenerationText.setText("Successfully generated PDF");
+		reportGenerationText.setText("Successfully generated CSV");
 	}
 	
 	public void submitReport(ActionEvent event) throws IOException {
-		reportSubmissionText.setText("Succesfully submitted PDF");
+		reportSubmissionText.setText("Succesfully submitted CSV");
 	}
 	
 }
