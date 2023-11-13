@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.collections.ObservableList?>
+<?import java.lang.String?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DefectViewController">
+   <children>
+      <Label layoutX="303.0" layoutY="35.0" text="Defect Console">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="55.0" layoutY="71.0" style="-fx-font-weight: bold;" text="1. Select the Project" />
+      <Label layoutX="461.0" layoutY="71.0" style="-fx-font-weight: bold;" text="2.a. Clear this Project's Defect Log. " />
+      <ComboBox fx:id="ProjectComboBox" layoutX="56.0" layoutY="93.0" onAction="#ProjectOnAction" prefWidth="150.0" >
+      	<items>
+      		<FXCollections fx:factory="observableArrayList">
+      			<String fx:value="Business Project"/>
+      			<String fx:value="Development Project"/>
+      			<String fx:value="Coding Project"/>
+      		</FXCollections>
+      	</items>
+      </ComboBox>
+      <Button fx:id="ClearButton" layoutX="467.0" layoutY="91.0" mnemonicParsing="false" onAction="#ClearOnAction" text="     Clear this Defect Log     " />
+      <Label fx:id="DefectLabel" layoutX="61.0" layoutY="119.0" text="No defects for this project." />
+      <Label layoutX="54.0" layoutY="137.0" style="-fx-font-weight: bold;" text="2.b. Select one of the following defects to make it this Current Defect or press &quot;Create a new Defect&quot;." />
+      <ComboBox fx:id="DefectComboBox" layoutX="56.0" layoutY="161.0" onAction="#DefectOnAction" prefWidth="150.0"/>
+      <Button fx:id="CreateButton" layoutX="468.0" layoutY="161.0" mnemonicParsing="false" onAction="#CreateOnAction" text="     Create a New Defect     " />
+      <Label layoutX="54.0" layoutY="195.0" style="-fx-font-weight: bold;" text="3. Define or update the following Current Defect atrributes:" />
+      <Label layoutX="79.0" layoutY="213.0" style="-fx-font-weight: bold;" text="Num" />
+      <Label layoutX="131.0" layoutY="213.0" style="-fx-font-weight: bold;" text="Defect Name" />
+      <TextField fx:id = "NameInput" layoutX="135.0" layoutY="228.0" />
+      <Label fx:id="StatusText" layoutX="421.0" layoutY="213.0" style="-fx-font-weight: bold;" text="Status: Closed" />
+      <Button fx:id="CloseButton" layoutX="403.0" layoutY="228.0" mnemonicParsing="false" onAction="#CloseOnAction" text="       Close       " />
+      <Button fx:id="ReopenButton" layoutX="534.0" layoutY="228.0" mnemonicParsing="false" onAction="#ReopenOnAction" text="       Reopen       " />
+      <Label layoutX="79.0" layoutY="254.0" style="-fx-font-weight: bold;" text="Defect Symptoms or Cause/Resolution" />
+      <TextField fx:id = "DescriptionInput" layoutX="79.0" layoutY="270.0" prefHeight="55.0" prefWidth="508.0" />
+      <Label layoutX="61.0" layoutY="344.0" style="-fx-font-weight: bold;" text="Step when injected" />
+      <Label layoutX="303.0" layoutY="344.0" style="-fx-font-weight: bold;" text="Step when removed" />
+      <Label layoutX="542.0" layoutY="344.0" style="-fx-font-weight: bold;" text="Defect Category" />
+      <ComboBox fx:id="InjectComboBox" layoutX="36.0" layoutY="366.0" prefWidth="150.0">
+      	<items>
+      		<FXCollections fx:factory="observableArrayList">
+      			<String fx:id="PlanningI" fx:value="Planning"/>
+      			<String fx:id="InformationGatheringI" fx:value="Information Gathering"/>
+      			<String fx:id="InformationUnderstandingI" fx:value="Information Understanding"/>
+      			<String fx:id="VerifyingI" fx:value="Verifying"/>
+      			<String fx:id="OutliningI" fx:value="Outlining"/>
+      		</FXCollections>
+      	</items>
+      </ComboBox>
+      <ComboBox fx:id="RemoveComboBox" layoutX="281.0" layoutY="366.0" prefWidth="150.0">
+      	<items>
+      		<FXCollections fx:factory="observableArrayList">
+      			<String fx:id="PlanningR" fx:value="Planning"/>
+      			<String fx:id="InformationGatheringR" fx:value="Information Gathering"/>
+      			<String fx:id="InformationUnderstandingR" fx:value="Information Understanding"/>
+      			<String fx:id="VerifyingR" fx:value="Verifying"/>
+      			<String fx:id="OutliningR" fx:value="Outlining"/>
+      		</FXCollections>
+      	</items>
+      </ComboBox>
+      <ComboBox fx:id="CategoryComboBox" layoutX="510.0" layoutY="366.0" prefWidth="150.0">
+      	<items>
+      		<FXCollections fx:factory="observableArrayList">
+      			<String fx:id="NotSpecified" fx:value="Not Specified"/>
+      			<String fx:id="Documentation" fx:value="10 Documentation"/>
+      			<String fx:id="Syntax" fx:value="20 Syntax"/>
+      			<String fx:id="BuildPackage" fx:value="30 Build, Package"/>
+      			<String fx:id="Assignment" fx:value="40 Assignment"/>
+      		</FXCollections>
+      	</items>
+      </ComboBox>
+      <Label layoutX="84.0" layoutY="325.0" text="To insert a new line, press &lt;ctrl + option + return&gt; " />
+      <Label layoutX="70.0" layoutY="407.0" style="-fx-font-weight: bold;" text="These attributes have been saved" />
+      <Label layoutX="333.0" layoutY="407.0" style="-fx-font-weight: bold;" text="Fix:" />
+      <ComboBox fx:id="FixComboBox" layoutX="373.0" layoutY="403.0" prefWidth="150.0">
+      	<items>
+      		<FXCollections fx:factory="observableArrayList">
+      			<String fx:id="Yes" fx:value="Yes"/>
+      			<String fx:id="No" fx:value="No"/>
+      			<String fx:id="InProgress" fx:value="In Progress"/>
+      		</FXCollections>
+      	</items>
+      </ComboBox>
+      <Label layoutX="47.0" layoutY="429.0" style="-fx-font-weight: bold;" text="4. Press the &quot;Update the Current Defect&quot; to save the changes made above.    " />
+      <Button fx:id="UpdateButton" layoutX="55.0" layoutY="447.0" mnemonicParsing="false" onAction="#UpdateOnAction" text="     Update the Current Defect     " />
+      <Button fx:id="DeleteButton" layoutX="278.0" layoutY="447.0" mnemonicParsing="false" onAction="#DeleteOnAction" text="     Delete the Current Defect     " />
+      <Button fx:id="ProceedButton" layoutX="494.0" layoutY="447.0" mnemonicParsing="false" onAction="#ProceedOnAction" text="     Proceed to the Effort Log Console     " />
+   </children>
+</AnchorPane>

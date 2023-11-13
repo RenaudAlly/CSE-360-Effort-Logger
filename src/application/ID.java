@@ -4,11 +4,13 @@ public class ID {
 
 	private String user;
 	private String pass;
+	private int level;
 	
 	public ID() {
 		
-		user = "";
-		pass = "";
+		this.user = "";
+		this.pass = "";
+		this.level = 0;
 		
 	}
 	
@@ -24,6 +26,12 @@ public class ID {
 		
 	}
 	
+	public int getLevel() {
+		
+		return level;
+		
+	}
+	
 	public void setUser(String s) {
 		
 		this.user = s;
@@ -33,6 +41,13 @@ public class ID {
 	public void setPass(String s) {
 		
 		this.pass = s;
+		
+	}
+	
+	public void setLevel(int i) {
+		
+		
+		this.level = i;
 		
 	}
 	
