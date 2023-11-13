@@ -24,9 +24,9 @@ public class ReportGeneratorViewController {
 	private Label effortLogsReportLabel;
 	
 	private String validUsername;
-	
 	// TODO: Hook this up with defect data array list provided
 	private ArrayList<Defect> defectData = new ArrayList<Defect>(); // defect logs
+	private ArrayList<Effort> effortData = new ArrayList<Effort>(); // effort logs
 	
 	public void captureLogin(Login previousLogin) {
 		this.validUsername = previousLogin.getName();
@@ -44,7 +44,7 @@ public class ReportGeneratorViewController {
 	}
 	
 	public void createDefectLogsReport(ActionEvent event) throws IOException {
-		// TODO: Creating mock data
+		// TODO: Temporary mock data
 		defectData.add(new Defect("Additional comments were added", "Documentation", "Effort Logger", "Information gathering", "Information gathering", "Closed", "Only clarifiaction"));
 		defectData.add(new Defect("Delegating responsibilities", "Assignment", "Planning Poker", "Planning", "Outlining", "Open", "Some team members left"));
 		
@@ -68,7 +68,27 @@ public class ReportGeneratorViewController {
 	}
 	
 	public void createEffortLogsReport(ActionEvent event) throws IOException {
-		effortLogsReportLabel.setText("Sucessfully generated CSV");
+		// TODO: Temporary mock data
+		effortData.add(new Effort(1, "2023-11-12", "ProjectA", "Development", "Coding", "Agile"));
+		effortData.add(new Effort(2, "2023-11-13", "ProjectB", "Testing", "Testing", "Waterfall"));
+		
+		// Converting effort log array list to a string array list
+		ArrayList<String[]> effortLogs = new ArrayList<String[]>();
+		effortLogs.add(new String[]{"Effort Log Name", "Time Logged", "Project name", "Effort Category", "Plan"});
+		for (Effort effortLog : effortData) {
+			effortLogs.add(effortLog.getArray());
+		}
+		
+		// Creating the file
+		File csvEffortFile = new File("Effort_Logs.csv");
+		try (PrintWriter pw = new PrintWriter(csvEffortFile)){
+			effortLogs.stream()
+				.map(this::convertToCSV)
+				.forEach(pw::println);
+		}
+		
+		// Updates label for the effort log report generator
+		effortLogsReportLabel.setText("Successfully generated CSV");
 	}
 	
 	// converts any string array to a CSV readable format
