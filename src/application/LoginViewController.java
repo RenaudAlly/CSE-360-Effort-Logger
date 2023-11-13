@@ -15,7 +15,6 @@ import java.io.IOException;
 public class LoginViewController {
 	private Scene scene;
 	private Stage stage;
-	private Login login = new Login();
 
 	@FXML
 	private TextField UsernameInput;
