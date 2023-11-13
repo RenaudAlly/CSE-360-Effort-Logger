@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.PlanningPokerController">
+   <children>
+      <Separator layoutX="76.0" orientation="VERTICAL" prefHeight="500.0" prefWidth="34.0" />
+      <Button fx:id="generateUserStory" contentDisplay="TEXT_ONLY" layoutX="120.0" layoutY="452.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#DisplayNewStory" prefHeight="26.0" prefWidth="166.0" text="Generate User Story">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Button>
+      <Label alignment="CENTER" contentDisplay="BOTTOM" layoutX="192.0" layoutY="16.0" prefHeight="18.0" prefWidth="457.0" text="Planning Poker Session">
+         <font>
+            <Font size="20.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Label alignment="CENTER_LEFT" contentDisplay="BOTTOM" layoutX="129.0" layoutY="93.0" prefHeight="35.0" prefWidth="100.0" text="The Story: ">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="storyBoardText" alignment="TOP_LEFT" contentDisplay="TOP" layoutX="129.0" layoutY="147.0" prefHeight="105.0" prefWidth="516.0" text="Please Generate a User Story!" wrapText="true" />
+      <Separator layoutX="91.0" layoutY="50.0" prefHeight="26.0" prefWidth="659.0" />
+      <Button fx:id="submitValueButton" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="338.0" layoutY="452.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#UpdatePlanningPokerValue" prefHeight="26.0" prefWidth="170.0" text="Submit A Poker Value">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Button>
+      <TextField fx:id="textEntry" layoutX="229.0" layoutY="378.0" prefHeight="36.0" prefWidth="162.0" promptText="Enter a Effort Value" />
+      <Button fx:id="returnToEffortLoggerButton" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="620.0" layoutY="448.0" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#GoToLogginScreen" prefHeight="35.0" prefWidth="88.0" text="Exit">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="DEFAULT" />
+         </cursor>
+      </Button>
+      <Label contentDisplay="BOTTOM" layoutX="10.0" layoutY="8.0" prefHeight="46.0" prefWidth="81.0" text="Other Users Effort: " textOverrun="CLIP" wrapText="true" />
+      <Text fx:id="user1Text" layoutX="14.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User 1:" wrappingWidth="50" />
+      <Text fx:id="user2Text" layoutX="14.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User 2:" wrappingWidth="50" />
+      <Text fx:id="user5Text" layoutX="14.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User 5:" wrappingWidth="50" />
+      <Text fx:id="user3Text" layoutX="14.0" layoutY="166.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User 3:" wrappingWidth="50" />
+      <Text fx:id="user4Text" layoutX="14.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="User 4:" wrappingWidth="50" />
+      <MenuButton fx:id="planningPokerStyleButton" layoutX="571.0" layoutY="73.0" mnemonicParsing="false" onAction="#ChangeStyle" text="Select a Poker style">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#ToOneToTen" text="One to Ten" />
+          <MenuItem mnemonicParsing="false" onAction="#ToFibonacci" text="Fibonacci" />
+        </items>
+      </MenuButton>
+      <Text fx:id="historicalEffortPlanningPoker" layoutX="433.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Historical Effort level:" wrappingWidth="230.0" />
+      <Text fx:id="historicalDefetcsPlanningPoker" layoutX="433.0" layoutY="410.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Historical Defects level:" wrappingWidth="230.0" />
+      <Text fx:id="AvergeEffortPlanningPoker" layoutX="124.0" layoutY="326.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Average Effort: " wrappingWidth="300">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fx:id="CurrentProjPlanningPoker" layoutX="124.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Current Project: EffortLogger Development" wrappingWidth="700">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
