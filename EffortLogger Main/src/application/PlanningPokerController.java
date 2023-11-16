@@ -2,6 +2,7 @@ package application;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +21,8 @@ public class PlanningPokerController {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	private ArrayList<Effort> effortList = new ArrayList<Effort>();
+	private ArrayList<Defect> defectList = new ArrayList<Defect>();
 
 	@FXML
 	private Button generateUserStory, submitValueButton, returnToEffortLoggerButton;
@@ -44,6 +47,14 @@ public class PlanningPokerController {
 	ID currentID = new ID();
 	Defect defects = new Defect();
 	Effort effort = new Effort();
+	
+	public void SetEffortList(ArrayList<Effort> newList) {
+		effortList = newList;
+	}
+	
+	public void SetDefectList(ArrayList<Defect> newList) {
+		defectList = newList;
+	}
 	
 	public void SetUserPlanningPoker(ID newID) {
 		currentID = newID;

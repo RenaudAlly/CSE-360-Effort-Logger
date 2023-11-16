@@ -29,41 +29,73 @@ public class EffortLoggerConsoleController {
 	@FXML
 	private TextField effortTextField;
 	@FXML
-	private Button startActivityButton, stopActivityButton, defectLogConsoleButton, effortLogEditorButton, defectLogsButton, effortLogsButton;
+	private Button startActivityButton, stopActivityButton, defectLogConsoleButton, effortLogEditorButton, defectLogsButton, effortLogsButton, toLoginScreenButton;
 	@FXML
 	private Label clockLabel;
 	@FXML
-	private ComboBox<String> lifeCycleStepsComboBox, effortCategoryComboBox, planComboBox, projectComboBox;
-	@FXML
-	private Stage stage;
-	@FXML
-	private Scene scene; 
+	private ComboBox<String> lifeCycleStepsComboBox, effortCategoryComboBox, planComboBox, projectComboBox; 
 	@FXML
 	private LocalTime startTime, stopTime;
 	@FXML
 	private LocalDate startDate;
-	
-	private String currentDate, currentYear, currentMonth, currentDay;
 	@FXML
 	private int starttime, stoptime, loggedtime, hoursLogged, minutesLogged, secondsLogged;
 	
+	private Scene scene;
+	private Stage stage;
+	private String currentDate, currentYear, currentMonth, currentDay;
 	private Effort e;
+	private ID currentID = new ID();
+	private ArrayList<Effort> effortList = new ArrayList<Effort>();
+	private ArrayList<Defect> defectList = new ArrayList<Defect>();
 	
-	ArrayList<Effort> effortList = new ArrayList<Effort>();
-	ArrayList<Defect> defectList = new ArrayList<Defect>();
-	
-	//List<Project> list = new ArrayList<Project>();
+	public void SetUserEffortLoggerConsole(ID newID) {
+		currentID = newID;
+	}
 	
 	public void setList(ArrayList<Effort> newList) {
-		this.effortList = newList;
+		effortList = newList;
 	}
 	
 	public void setDefectList(ArrayList<Defect> newList) {
 		
-		this.defectList = newList;
+		defectList = newList;
 		
 	}
 	
+	public void DisplayUnauthorizedStage() {
+		Stage unauthorizedStage = new Stage();
+		unauthorizedStage.setTitle("Error");
+		
+		Label unauthorizedLabel = new Label();
+		unauthorizedLabel.setText("You are not authorized to use this feature");
+		
+		
+		Scene unauthorizedScene = new Scene(unauthorizedLabel, 245, 50);
+		
+		unauthorizedLabel.setPadding(new Insets(10,0,0,10));
+		unauthorizedLabel.setFont(new Font("Arial", 12));
+		
+		unauthorizedStage.setScene(unauthorizedScene);
+		unauthorizedStage.show();
+	}
+	
+	public void DisplayEntryErrorStage() {
+		Stage entryErrorStage = new Stage();
+		entryErrorStage.setTitle("Error");
+		
+		Label entryErrorLabel = new Label();
+		entryErrorLabel.setText("Choose a unique entry name");
+		
+		
+		Scene unauthorizedScene = new Scene(entryErrorLabel, 180, 50);
+		
+		entryErrorLabel.setPadding(new Insets(10,0,0,10));
+		entryErrorLabel.setFont(new Font("Arial", 12));
+		
+		entryErrorStage.setScene(unauthorizedScene);
+		entryErrorStage.show();
+	}
 	
 	public void StartActivity(ActionEvent event) throws IOException {
 		clockLabel.setText("Clock has Started");
@@ -76,6 +108,16 @@ public class EffortLoggerConsoleController {
 	public void StopActivity(ActionEvent event) throws IOException {
 		clockLabel.setText("Clock is Stopped");
 		clockLabel.setStyle("-fx-text-fill: red;");
+		int size = effortList.size();
+		
+		if (size >= 1) {
+			for (int i = 0; i < size; i++) {
+				if (effortList.get(i).getEffortName().equals(effortTextField.getText().toString())) {
+					DisplayEntryErrorStage();
+					return;
+				}
+			}
+		}
 		
 		e = new Effort();
 		
@@ -122,17 +164,25 @@ public class EffortLoggerConsoleController {
         DefectViewController controller = loader.getController();
         controller.setEffort(effortList);
         controller.setArray(defectList);
+        controller.SetUserDefectConsole(currentID);
+        
         stage.setScene(scene);
         stage.show();
 	}
 	
 	public void ToEffortLogEditor(ActionEvent event) throws IOException {
+		if (currentID.getLevel() != 2) {
+			DisplayUnauthorizedStage();
+			return;
+		}
+		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("EffortLogEditor.fxml"));
         Parent root = loader.load();
 
         EffortLogEditorController controller = loader.getController();
         controller.setList(effortList);
         controller.setDefect(defectList);
+        controller.SetUserEffortLogEditor(currentID);
         
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -148,11 +198,28 @@ public class EffortLoggerConsoleController {
         DefectLogViewController controller = loader.getController();
         controller.setEffort(effortList);
         controller.setArray(defectList);
+        controller.SetUserDefectLog(currentID);
+        
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
 	}
+
+	public void ToLoginScreen(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
+		Parent root = loader.load();
+		
+		LoginViewController controller = loader.getController();
+		controller.SetUserLoginScreen(currentID);
+		controller.SetEffortList(effortList);
+		controller.SetDefectList(defectList);
+		
+		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+	} 
 	
 	public void ToEffortLog(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("ProjectLog.fxml"));
@@ -161,6 +228,7 @@ public class EffortLoggerConsoleController {
         ProjectLogController controller = loader.getController();
         controller.setList(effortList);
         controller.setDefect(defectList);
+        controller.setUserEffortLog(currentID);
 
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

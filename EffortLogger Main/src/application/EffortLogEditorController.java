@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,11 +33,17 @@ public class EffortLogEditorController {
 	@FXML
 	private Scene scene;
 	
+	private ID currentID = new ID();
+	
 	ArrayList<Effort> effortList = new ArrayList<Effort>();
 	
 	ArrayList<Defect> defectList = new ArrayList<Defect>();
 	
 	List<Project> list = new ArrayList<Project>();
+	
+	public void SetUserEffortLogEditor(ID newID) {
+		currentID = newID;
+	}
 	
 	public void setList(ArrayList<Effort> newList) {
 		this.effortList = newList;
@@ -71,6 +78,8 @@ public class EffortLogEditorController {
 		if (effortList.isEmpty()) return;
 		
 		int size = effortList.size();
+		
+		if (projectComboBox.getValue() == null) return;
 	
 		for (int i = 0; i < size; i++) {
 			int index = indexOfEffort(projectComboBox.getValue());
@@ -80,6 +89,7 @@ public class EffortLogEditorController {
 	
 	public int indexOfEffort(String projectName) {
 		int index = -1;
+		
 		
 		for (int i = 0; i < effortList.size(); i++) {
 			if (effortList.get(i).getProjectName().equals(projectName)) {
@@ -126,6 +136,8 @@ public class EffortLogEditorController {
 	public void DeleteThisEntry(ActionEvent event) throws IOException {
 		if (effortList.isEmpty()) return;
 		
+		if (effortLogEntryComboBox.getValue() == null) return;
+		
 		int index = indexOfEffortName(effortLogEntryComboBox.getValue());
 		effortList.remove(index);
 	}
@@ -147,6 +159,7 @@ public class EffortLogEditorController {
         EffortLoggerConsoleController controller = loader.getController();
         controller.setList(effortList);
         controller.setDefectList(defectList);
+        controller.SetUserEffortLoggerConsole(currentID);
         
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 import javafx.collections.FXCollections;
@@ -11,6 +12,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,7 +23,7 @@ public class DefectViewController {
 	private Scene scene;
 	
 	// user who logged in
-	private ID user;
+	private ID currentID = new ID();
 	private boolean closed = false;
 	private boolean edit = false;
 	private boolean arrayexists = false;
@@ -39,12 +42,28 @@ public class DefectViewController {
 	private TextField DescriptionInput;
 	@FXML	
 	private ComboBox<String> InjectComboBox, CategoryComboBox, RemoveComboBox, FixComboBox, DefectComboBox, ProjectComboBox;
-	
-	public void setUser(ID user1) {
+
+	public void DisplayDefectErrorStage() {
+		Stage entryErrorStage = new Stage();
+		entryErrorStage.setTitle("Error");
 		
-		this.user = user1;
+		Label entryErrorLabel = new Label();
+		entryErrorLabel.setText("Choose a unique defect name");
 		
+		
+		Scene unauthorizedScene = new Scene(entryErrorLabel, 180, 50);
+		
+		entryErrorLabel.setPadding(new Insets(10,0,0,10));
+		entryErrorLabel.setFont(new Font("Arial", 12));
+		
+		entryErrorStage.setScene(unauthorizedScene);
+		entryErrorStage.show();
 	}
+	
+	public void SetUserDefectConsole(ID newID) {
+		currentID = newID;
+	}
+	
 	public void setArray(ArrayList<Defect> array) {
 		
 		this.array = array;
@@ -344,6 +363,8 @@ public class DefectViewController {
 					
 					DefectLogViewController control = fxmlLoader.getController();
 					control.setArray(array);
+					control.SetUserDefectLog(currentID);
+					
 					stage.setScene(scene);
 					stage.show();
 					
@@ -379,6 +400,8 @@ public class DefectViewController {
 		EffortLoggerConsoleController control = fxmlLoader.getController();
 		control.setList(effort);
 		control.setDefectList(array);
+		control.SetUserEffortLoggerConsole(currentID);
+		
 		stage.setScene(scene);
 		stage.show();
 		

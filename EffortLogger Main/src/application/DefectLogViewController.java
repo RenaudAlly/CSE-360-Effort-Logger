@@ -22,11 +22,16 @@ public class DefectLogViewController {
 	
 	private ArrayList<Defect> array;
 	private ArrayList<Effort> effort;
+	private ID currentID = new ID();
 	
 	@FXML
 	private TableColumn<Defect, String> DefectName, DefectCategory, InjectStep, RemoveStep, Status, DefectSymptoms, Project;
 	@FXML
 	private TableView<Defect> DefectLog;
+	
+	public void SetUserDefectLog(ID newID) {
+		currentID = newID;
+	}
 	
 	public void setArray(ArrayList<Defect> array) {
 		
@@ -67,6 +72,7 @@ public class DefectLogViewController {
 		stage.setTitle("EffortLogger V2");
 		
 		DefectViewController control = fxmlLoader.getController();
+		control.SetUserDefectConsole(currentID);
 		control.setEffort(effort);
 		control.setArray(array);
 		stage.setScene(scene);

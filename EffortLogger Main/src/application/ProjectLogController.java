@@ -43,8 +43,14 @@ public class ProjectLogController {
     
     private Effort e;
     
+    private ID currentID = new ID();
+    
     ArrayList<Effort> effortList = new ArrayList<Effort>();
     ArrayList<Defect> defectList = new ArrayList<Defect>();
+    
+    public void setUserEffortLog(ID newID) {
+    	currentID = newID;
+    }
     
     
     public void setList(ArrayList<Effort> newList) {
@@ -74,7 +80,8 @@ public class ProjectLogController {
         EffortLoggerConsoleController controller = loader.getController();
         controller.setList(effortList);
         controller.setDefectList(defectList);
-
+        controller.SetUserEffortLoggerConsole(currentID);
+        
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

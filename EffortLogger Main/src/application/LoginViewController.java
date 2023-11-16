@@ -9,13 +9,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 
 
 public class LoginViewController {
 	private Scene scene;
 	private Stage stage;
-
+	private ID currentID = new ID();
+	private ArrayList<Effort> effortList = new ArrayList<Effort>();
+	private ArrayList<Defect> defectList = new ArrayList<Defect>();
+	
 	@FXML
 	private TextField UsernameInput;
 	@FXML
@@ -24,6 +28,18 @@ public class LoginViewController {
 	private Label SignUpText;
 	@FXML
 	private ComboBox<String> ComboBoxInput; 
+	
+	public void SetUserLoginScreen(ID newID) {
+		currentID = newID;
+	}
+	
+	public void SetEffortList(ArrayList<Effort> newList) {
+		effortList = newList;
+	}
+	
+	public void SetDefectList(ArrayList<Defect> newList) {
+		defectList = newList;
+	}
 	
 	public void SignUpButtonOnAction(ActionEvent event) throws IOException {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SignUpScreen.fxml"));
@@ -110,7 +126,7 @@ public class LoginViewController {
 					}
 					else {
 						
-						SignUpText.setText("Your account does not have the permissions.");
+						SignUpText.setText("Your account does not have permission.");
 						perm = true;
 						break;
 						
@@ -135,12 +151,16 @@ public class LoginViewController {
 					stage.setTitle("EffortLogger V2");
 					
 					EffortLoggerConsoleController control = fxmlLoader.getController();
-					//control.setUser(useridfinal);
+					control.SetUserEffortLoggerConsole(useridfinal);
+					control.setList(effortList);
+					control.setDefectList(defectList);
+					
 					stage.setScene(scene);
 					stage.show();
 					
 				}
 				else if(go.equals("Planning Poker")){
+					
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlanningPoker.fxml"));
 					stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 					scene = new Scene(fxmlLoader.load(), 750, 500);
@@ -148,6 +168,9 @@ public class LoginViewController {
 					
 					PlanningPokerController control = fxmlLoader.getController();
 					control.SetUserPlanningPoker(useridfinal);
+					control.SetDefectList(defectList);
+					control.SetEffortList(effortList);
+					
 					stage.setScene(scene);
 					stage.show();
 					
