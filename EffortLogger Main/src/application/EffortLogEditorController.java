@@ -39,8 +39,6 @@ public class EffortLogEditorController {
 	
 	ArrayList<Defect> defectList = new ArrayList<Defect>();
 	
-	List<Project> list = new ArrayList<Project>();
-	
 	public void SetUserEffortLogEditor(ID newID) {
 		currentID = newID;
 	}

@@ -49,6 +49,35 @@ public class EffortLoggerConsoleController {
 	private ArrayList<Effort> effortList = new ArrayList<Effort>();
 	private ArrayList<Defect> defectList = new ArrayList<Defect>();
 	
+	@SuppressWarnings("serial")
+	private ArrayList<String> plansList = new ArrayList<String>() {
+		{
+		add("Project Plan");
+		add("Risk Mitigation Plan");
+		add("Conceptual Design Plan");
+		add("Detailed Design Plan");
+		add("Implementation Plan");
+		}
+	};
+	
+	@SuppressWarnings("serial")
+	private ArrayList<String> deliverablesList = new ArrayList<String>() {
+		{
+		add("Conceptual Design");
+		add("Detailed Design");
+		add("Test Cases");
+		add("Solution");
+		add("Reflection");
+		add("Outline");
+		add("Draft");
+		add("Report");
+		add("User Defined");
+		}
+	};
+	
+	private ObservableList<String> plansOList = FXCollections.observableArrayList(plansList);
+	private ObservableList<String> deliverablesOList = FXCollections.observableArrayList(deliverablesList);
+	
 	public void SetUserEffortLoggerConsole(ID newID) {
 		currentID = newID;
 	}
@@ -61,6 +90,16 @@ public class EffortLoggerConsoleController {
 		
 		defectList = newList;
 		
+	}
+	
+	public void SetEffortCategory(ActionEvent event) throws IOException {
+		String currentEffortCategory = effortCategoryComboBox.getValue();
+		if (currentEffortCategory.equals("Plans")) {
+			planComboBox.setItems(plansOList);
+		}
+		if (currentEffortCategory.equals("Deliverables")) {
+			planComboBox.setItems(deliverablesOList);
+		}
 	}
 	
 	public void DisplayUnauthorizedStage() {
@@ -222,10 +261,10 @@ public class EffortLoggerConsoleController {
 	} 
 	
 	public void ToEffortLog(ActionEvent event) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("ProjectLog.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("EffortLog.fxml"));
         Parent root = loader.load();
         
-        ProjectLogController controller = loader.getController();
+        EffortLogController controller = loader.getController();
         controller.setList(effortList);
         controller.setDefect(defectList);
         controller.setUserEffortLog(currentID);

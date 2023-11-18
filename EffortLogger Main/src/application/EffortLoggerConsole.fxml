@@ -73,33 +73,43 @@
          	<items>
          		<FXCollections fx:factory="observableArrayList">
          			<String fx:value="Planning"/>
-         			<String fx:value="Problem Understanding"/>
-         			<String fx:value="Detailed Design Plan"/>
-         			<String fx:value="Information Gathering"/>
-         			<String fx:value="Outline"/>
          			<String fx:value="Conceptual Design Plan"/>
-         			<String fx:value="Implementation Plan"/>
+         			<String fx:value="Requirements"/>
+         			<String fx:value="Conceptual Design"/>
+         			<String fx:value="Conceptual Design Review"/>
+         			<String fx:value="Detailed Design Plan"/>
+         			<String fx:value="Detailed Design/Prototype"/>
+         			<String fx:value="Detailed Design Review"/>
          			<String fx:value="Implementation Plan"/>
          			<String fx:value="Test Case Generation"/>
+         			<String fx:value="Solution Specification"/>
+         			<String fx:value="Solution Review"/>
+         			<String fx:value="Solution Implementation"/>
+         			<String fx:value="Unit/System Test"/>
+         			<String fx:value="Reflection"/>
+         			<String fx:value="Repository Update"/>
+         			<String fx:value="Planning"/>
+         			<String fx:value="Information Gathering"/>
+         			<String fx:value="Information Understanding"/>
+         			<String fx:value="Verifying"/>
+         			<String fx:value="Outlining"/>
+         			<String fx:value="Drafting"/>
+         			<String fx:value="Finalizing"/>
+         			<String fx:value="Team Meeting"/>
+         			<String fx:value="Coach Meeting"/>
+         			<String fx:value="Stakeholder Meeting"/>
          		</FXCollections>
          	</items>
          </ComboBox>
-         <ComboBox fx:id="effortCategoryComboBox" layoutX="85.0" layoutY="257.0" prefHeight="26.0" prefWidth="174.0" >
+         <ComboBox fx:id="effortCategoryComboBox" layoutX="85.0" layoutY="257.0" prefHeight="26.0" prefWidth="174.0" onAction="#SetEffortCategory" >
          	<items>
          		<FXCollections fx:factory="observableArrayList">
          			<String fx:value="Plans"/>
+         			<String fx:value="Deliverables"/>
          		</FXCollections>
          	</items>
          </ComboBox>
-         <ComboBox fx:id="planComboBox" layoutX="274.0" layoutY="257.0" prefHeight="26.0" prefWidth="434.0">
-         	<items>
-         		<FXCollections fx:factory="observableArrayList">
-         			<String fx:value="Project Plan"/>
-         			<String fx:value="Risk Mitigation Plan"/>
-         			<String fx:value="Conceptual Design Plan"/>
-         		</FXCollections>
-         	</items>
-         </ComboBox>
+         <ComboBox fx:id="planComboBox" layoutX="274.0" layoutY="257.0" prefHeight="26.0" prefWidth="434.0"/>
          <Label layoutX="33.0" layoutY="310.0" text="3. Press the &quot;Stop this Activity&quot; to generate an effort log entry using the attributes above." />
          <Button fx:id="stopActivityButton" alignment="CENTER" layoutX="35.0" layoutY="340.0" mnemonicParsing="false" onAction="#StopActivity" text="Stop this Activity" />
          <Label layoutX="33.0" layoutY="383.0" text="4. Unless you are done for the day, it is best to perform steps 1 and 2 above before resuming work." />
