@@ -51,6 +51,7 @@ public class DefectLogViewController {
 			Status.setCellValueFactory(new PropertyValueFactory<Defect, String>("status"));
 			DefectSymptoms.setCellValueFactory(new PropertyValueFactory<Defect, String>("symptoms"));
 			Project.setCellValueFactory(new PropertyValueFactory<Defect, String>("project"));
+
 			ObservableList<Defect> list = FXCollections.observableArrayList(this.array);
 			DefectLog.setItems(list);
 			

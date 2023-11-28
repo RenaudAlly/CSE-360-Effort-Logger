@@ -1,11 +1,11 @@
 # Tu22's CSE 360 EffortLogger 
 
 Members: 
-- Matthew Ian Wang
-- Adam Bonnet
-- Sawyer Timothy Kesti
-- Arjun Khetan
-- Meshach Samuel (Sam)
+- Matthew Ian Wang      (matthewwangg)
+- Adam Bonnet           (Eggsrael)
+- Sawyer Timothy Kesti  (SoysauceTK)
+- Arjun Khetan          (RenaudAlly)
+- Meshach Samuel        (ProntoSbinalla)
 
 ### Commit Convensions quick refrence
 `<type>[optionals scope]: <description>`
