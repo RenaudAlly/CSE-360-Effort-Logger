@@ -18,7 +18,7 @@
          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
       </padding>
       <children>
-      	 <TextField fx:id="effortTextField" layoutX="150" layoutY="99" prefHeight="26.0" prefWidth="126.0" />
+      	 <TextField fx:id="effortTextField" layoutX="150" layoutY="99" prefHeight="26.0" prefWidth="126.0" promptText="Enter Name"/>
          <Button fx:id="startActivityButton" alignment="CENTER" layoutX="37.0" layoutY="99.0" mnemonicParsing="false" onAction="#StartActivity" text="Start an Activity" />
          <Button fx:id="defectLogConsoleButton" layoutX="35.0" layoutY="421.0" mnemonicParsing="false" onAction="#ToDefectLogConsole" text="Defect Log Console" />
          <Button fx:id="effortLogEditorButton" layoutX="178.0" layoutY="420.0" mnemonicParsing="false" onAction="#ToEffortLogEditor" text="Effort Log Editor" />
@@ -115,4 +115,5 @@
          <Label layoutX="33.0" layoutY="383.0" text="4. Unless you are done for the day, it is best to perform steps 1 and 2 above before resuming work." />
          <Button fx:id="effortLogsButton" layoutX="303.0" layoutY="420.0" mnemonicParsing="false" onAction="#ToEffortLog" text="Effort Logs" />
          <Button fx:id="defectLogsButton" layoutX="400.0" layoutY="420.0" mnemonicParsing="false" onAction="#ToDefectLogs" text="Defect Logs" />
+         <Button fx:id="generateReportButton" layoutX="497.0" layoutY="420.0" mnemonicParsing="false" onAction="#GenerateReports" text="Print Report" />
       </children></AnchorPane>

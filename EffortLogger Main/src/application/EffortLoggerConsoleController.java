@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,14 +14,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Glow;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import java.time.*;
 import java.util.ArrayList;
-import java.util.List;
 import javafx.scene.control.TextField;
 
 
@@ -29,7 +26,10 @@ public class EffortLoggerConsoleController {
 	@FXML
 	private TextField effortTextField;
 	@FXML
-	private Button startActivityButton, stopActivityButton, defectLogConsoleButton, effortLogEditorButton, defectLogsButton, effortLogsButton, toLoginScreenButton;
+	private Button startActivityButton, stopActivityButton, 
+					defectLogConsoleButton, effortLogEditorButton, 
+					defectLogsButton, effortLogsButton, 
+					toLoginScreenButton, generateReportButton;
 	@FXML
 	private Label clockLabel;
 	@FXML
@@ -48,6 +48,7 @@ public class EffortLoggerConsoleController {
 	private ID currentID = new ID();
 	private ArrayList<Effort> effortList = new ArrayList<Effort>();
 	private ArrayList<Defect> defectList = new ArrayList<Defect>();
+	private boolean timerStartedBool = false;
 	
 	@SuppressWarnings("serial")
 	private ArrayList<String> plansList = new ArrayList<String>() {
@@ -91,6 +92,8 @@ public class EffortLoggerConsoleController {
 		defectList = newList;
 		
 	}
+	
+	
 	
 	public void SetEffortCategory(ActionEvent event) throws IOException {
 		String currentEffortCategory = effortCategoryComboBox.getValue();
@@ -137,6 +140,8 @@ public class EffortLoggerConsoleController {
 	}
 	
 	public void StartActivity(ActionEvent event) throws IOException {
+		
+		timerStartedBool = true;
 		clockLabel.setText("Clock has Started");
 		clockLabel.setStyle("-fx-text-fill: green;");
 		startTime = LocalTime.now();
@@ -145,6 +150,10 @@ public class EffortLoggerConsoleController {
 	}
 	
 	public void StopActivity(ActionEvent event) throws IOException {
+		if(!timerStartedBool) {
+			
+			return;
+		}
 		clockLabel.setText("Clock is Stopped");
 		clockLabel.setStyle("-fx-text-fill: red;");
 		int size = effortList.size();
@@ -229,8 +238,26 @@ public class EffortLoggerConsoleController {
         stage.show();
 		}
 	
-	
-	
+	public void GenerateReports(ActionEvent event) throws IOException{
+		if (currentID.getLevel() != 2) {
+			DisplayUnauthorizedStage();
+			return;
+		}
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("ReportGeneratorPage.fxml"));
+        Parent root = loader.load();
+        
+        ReportGeneratorViewController controller = loader.getController();
+        controller.SetEffortList(effortList);
+        controller.SetDefectList(defectList);
+        controller.SetUserReportGenerator(currentID);
+        
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+	}
+
 	public void ToDefectLogs(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("DefectLog.fxml"));
         Parent root = loader.load();
@@ -274,5 +301,6 @@ public class EffortLoggerConsoleController {
         stage.setScene(scene);
         stage.show();
 	}
+	
 }
 
