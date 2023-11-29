@@ -18,18 +18,19 @@ import java.util.Scanner;
 public class LoginViewController {
 	private Scene scene;
 	private Stage stage;
+	@SuppressWarnings("unused")
 	private ID currentID = new ID();
 	private ArrayList<Effort> effortList = new ArrayList<Effort>();
 	private ArrayList<Defect> defectList = new ArrayList<Defect>();
 	
 	@FXML
-	private TextField UsernameInput;
+	private TextField usernameInput;
 	@FXML
-	private PasswordField PasswordInput;
+	private PasswordField passwordInput;
 	@FXML
-	private Label SignUpText;
+	private Label signUpText;
 	@FXML
-	private ComboBox<String> ComboBoxInput; 
+	private ComboBox<String> comboBoxInput; 
 	
 	public void SetUserLoginScreen(ID newID) {
 		currentID = newID;
@@ -90,14 +91,14 @@ public class LoginViewController {
 		// the array of credentials
 		ID[] arr = new ID[]{userid, userid2, userid3, userid4, userid5};
 		// save the username input and password input to string
-		String username = UsernameInput.getText().toString();
-		String password = PasswordInput.getText().toString();
+		String username = usernameInput.getText().toString();
+		String password = passwordInput.getText().toString();
 		
 		// if the username or password fall out of the range of acceptable number of characters
 		if (username.length() > 32 || password.length() > 32) {
 			
 			// display an invalid message that instructs them to change it
-			SignUpText.setText("Please enter an input that is 32 characters or less.");
+			signUpText.setText("Please enter an input that is 32 characters or less.");
 			
 		}
 		
@@ -124,7 +125,7 @@ public class LoginViewController {
 						
 					}
 					else {		
-						SignUpText.setText("Your account does not have permission.");
+						signUpText.setText("Your account does not have permission.");
 						perm = true;
 						break;	
 					}	
@@ -138,7 +139,7 @@ public class LoginViewController {
 				// TODO: Silently import if effort and defect logs exist
 				importData(effortList, defectList);
 				
-				String go = ComboBoxInput.getValue().toString();
+				String go = comboBoxInput.getValue().toString();
 				
 				if (go.equals("Effort Logger")) {
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EffortLoggerConsole.fxml"));
@@ -176,7 +177,7 @@ public class LoginViewController {
 				if (perm == false) {
 					
 					// display an invalid message that tells the user to try again
-					SignUpText.setText("Invalid Username or Password! Please try again. ");
+					signUpText.setText("Invalid Username or Password! Please try again. ");
 				}
 			}
 		}

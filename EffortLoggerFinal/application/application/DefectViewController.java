@@ -7,8 +7,6 @@ import javafx.scene.control.*;
 import javafx.scene.text.Font;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -108,7 +106,7 @@ public class DefectViewController {
 		
 		ObservableList<String> list = FXCollections.observableArrayList(relevant);
 		defectComboBox.setItems(list);
-		
+	
 		DefectLabel.setText(Integer.toString(relevant.size()) + " defects for this project.");
 		
 	}

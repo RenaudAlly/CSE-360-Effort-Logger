@@ -10,7 +10,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.*;
 
@@ -28,6 +27,7 @@ public class ViewPages extends Application implements EventHandler<ActionEvent> 
 		launch(args);
 	}
 	
+	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })
 	@Override
 	public void start(Stage primaryStage) throws Exception{
 		

@@ -16,24 +16,24 @@ public class SignUpViewController {
 	private Stage stage;
 
 	@FXML
-	private TextField UsernameInput;
+	private TextField usernameInput;
 	@FXML
-	private PasswordField PasswordInput;
+	private PasswordField passwordInput;
 	@FXML
-	private ComboBox<String> ComboBoxInput;
+	private ComboBox<String> comboBoxInput;
 
 	public void SignUpButtonOnAction(ActionEvent event) throws IOException {
 		
 		ID newuser = new ID();
 		
-		String username = UsernameInput.getText().toString();
-		String password = PasswordInput.getText().toString();
+		String username = usernameInput.getText().toString();
+		String password = passwordInput.getText().toString();
 		
 		if (username.length() > 0 && password.length() > 0 && username.length() < 33 && password.length() < 33) {
 			newuser.setUser(username);
 			newuser.setPass(password);
 		
-			String level = ComboBoxInput.getValue().toString();
+			String level = comboBoxInput.getValue().toString();
 		
 			if (level == "Guest") {
 				
@@ -63,7 +63,7 @@ public class SignUpViewController {
 		scene = new Scene(fxmlLoader.load(), 750, 500);
 		stage.setTitle("Login Page");
 		
-		LoginViewController control = fxmlLoader.getController();
+//		LoginViewController control = fxmlLoader.getController();
 		stage.setScene(scene);
 		stage.show();
 		

@@ -9,18 +9,18 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DefectLogViewController">
    <children>
-      <TableView fx:id="DefectLog" layoutX="22.0" layoutY="68.0" prefHeight="415.0" prefWidth="711.0">
+      <TableView fx:id="defectLog" layoutX="22.0" layoutY="68.0" prefHeight="415.0" prefWidth="711.0">
         <columns>
-          	<TableColumn fx:id="DefectName" prefWidth="99.19997787475586" text="Defect Name" />
-          	<TableColumn fx:id="DefectCategory" prefWidth="106.4000244140625" text="Defect Category" />
-            <TableColumn fx:id="Project" prefWidth="60.00006103515625" text="Project" />
-            <TableColumn fx:id="InjectStep" prefWidth="75.0" text="Inject Step" />
-            <TableColumn fx:id="RemoveStep" prefWidth="89.60003662109375" text="Remove Step" />
-            <TableColumn fx:id="Status" prefWidth="75.0" text="Status" />
-            <TableColumn fx:id="DefectSymptoms" prefWidth="198.40005493164062" text="Defect Symptoms" />
+          	<TableColumn fx:id="defectName" prefWidth="99.19997787475586" text="Defect Name" />
+          	<TableColumn fx:id="defectCategory" prefWidth="106.4000244140625" text="Defect Category" />
+            <TableColumn fx:id="project" prefWidth="60.00006103515625" text="Project" />
+            <TableColumn fx:id="injectStep" prefWidth="75.0" text="Inject Step" />
+            <TableColumn fx:id="removeStep" prefWidth="89.60003662109375" text="Remove Step" />
+            <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+            <TableColumn fx:id="defectSymptoms" prefWidth="198.40005493164062" text="Defect Symptoms" />
         </columns>
       </TableView>
-      <Button fx:id="ReturnButton" layoutX="22.0" layoutY="32.0" mnemonicParsing="false" onAction="#ReturnOnAction" text="Defect Console" />
+      <Button fx:id="returnButton" layoutX="22.0" layoutY="32.0" mnemonicParsing="false" onAction="#ReturnOnAction" text="Defect Console" />
       <Label layoutX="327.0" layoutY="29.0" text="Defect Log">
          <font>
             <Font size="20.0" />

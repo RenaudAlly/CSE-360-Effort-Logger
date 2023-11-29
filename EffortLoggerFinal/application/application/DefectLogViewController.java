@@ -18,16 +18,16 @@ public class DefectLogViewController {
 	private Scene scene;
 	
 	@FXML
-	private Button ReturnButton;
+	private Button returnButton;
 	
 	private ArrayList<Defect> array;
 	private ArrayList<Effort> effort;
 	private ID currentID = new ID();
 	
 	@FXML
-	private TableColumn<Defect, String> DefectName, DefectCategory, InjectStep, RemoveStep, Status, DefectSymptoms, Project;
+	private TableColumn<Defect, String> defectName, defectCategory, injectStep, removeStep, status, defectSymptoms, project;
 	@FXML
-	private TableView<Defect> DefectLog;
+	private TableView<Defect> defectLog;
 	
 	public void SetUserDefectLog(ID newID) {
 		currentID = newID;
@@ -44,16 +44,16 @@ public class DefectLogViewController {
 		}
 		else {
 		
-			DefectName.setCellValueFactory(new PropertyValueFactory<Defect, String>("name"));
-			DefectCategory.setCellValueFactory(new PropertyValueFactory<Defect, String>("category"));
-			InjectStep.setCellValueFactory(new PropertyValueFactory<Defect, String>("inject"));
-			RemoveStep.setCellValueFactory(new PropertyValueFactory<Defect, String>("remove"));
-			Status.setCellValueFactory(new PropertyValueFactory<Defect, String>("status"));
-			DefectSymptoms.setCellValueFactory(new PropertyValueFactory<Defect, String>("symptoms"));
-			Project.setCellValueFactory(new PropertyValueFactory<Defect, String>("project"));
+			defectName.setCellValueFactory(new PropertyValueFactory<Defect, String>("name"));
+			defectCategory.setCellValueFactory(new PropertyValueFactory<Defect, String>("category"));
+			injectStep.setCellValueFactory(new PropertyValueFactory<Defect, String>("inject"));
+			removeStep.setCellValueFactory(new PropertyValueFactory<Defect, String>("remove"));
+			status.setCellValueFactory(new PropertyValueFactory<Defect, String>("status"));
+			defectSymptoms.setCellValueFactory(new PropertyValueFactory<Defect, String>("symptoms"));
+			project.setCellValueFactory(new PropertyValueFactory<Defect, String>("project"));
 
 			ObservableList<Defect> list = FXCollections.observableArrayList(this.array);
-			DefectLog.setItems(list);
+			defectLog.setItems(list);
 			
 		}
 		
