@@ -31,7 +31,7 @@ public class LoginViewController {
 	private Label signUpText;
 	@FXML
 	private ComboBox<String> comboBoxInput; 
-	
+
 	public void SetUserLoginScreen(ID newID) {
 		currentID = newID;
 	}

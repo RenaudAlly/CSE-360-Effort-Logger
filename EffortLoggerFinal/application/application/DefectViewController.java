@@ -150,6 +150,7 @@ public class DefectViewController {
 		DefectLogViewController control = fxmlLoader.getController();
 		control.setEffort(effort);
 		control.setArray(array);
+		control.SetUserDefectLog(currentID);
 		stage.setScene(scene);
 		stage.show();
 		
@@ -277,6 +278,7 @@ public class DefectViewController {
 					DefectLogViewController control = fxmlLoader.getController();
 					control.setEffort(effort);
 					control.setArray(array);
+					control.SetUserDefectLog(currentID);
 					stage.setScene(scene);
 					stage.show();
 					
@@ -369,6 +371,7 @@ public class DefectViewController {
 					DefectLogViewController control = fxmlLoader.getController();
 					control.setArray(array);
 					control.SetUserDefectLog(currentID);
+					control.SetUserDefectLog(currentID);
 					
 					stage.setScene(scene);
 					stage.show();
@@ -412,6 +415,7 @@ public class DefectViewController {
 		
 		control.setEffort(effort);
 		control.setArray(array);
+		control.SetUserDefectLog(currentID);
 		
 		statusText.setText("Status: Closed");
 		nameInput.clear();
