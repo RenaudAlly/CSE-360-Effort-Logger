@@ -385,7 +385,34 @@ public class DefectViewController {
 
 	public void DeleteOnAction(ActionEvent event) throws IOException {
 		
-		// add functionality to delete the selected defect
+		if (projectComboBox.getValue() == null) {
+			
+			return;
+			
+		}
+		
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DefectLog.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(fxmlLoader.load(), 750, 500);
+		stage.setTitle("EffortLogger V2");
+		
+		
+		DefectLogViewController control = fxmlLoader.getController();
+		
+		for (int i = 0; i < array.size(); i++) {
+			
+			if (defectComboBox.getValue().toString().equals(array.get(i).getName())) {
+				
+				array.remove(i);
+				break;
+				
+			}
+			
+		}
+		
+		control.setEffort(effort);
+		control.setArray(array);
+		
 		statusText.setText("Status: Closed");
 		nameInput.clear();
 		descriptionInput.clear();
@@ -393,6 +420,9 @@ public class DefectViewController {
 		removeComboBox.setValue(null);
 		categoryComboBox.setValue(null);
 		fixComboBox.setValue(null);
+		
+		stage.setScene(scene);
+		stage.show();
 		
 	}
 	public void ProceedOnAction(ActionEvent event) throws IOException {
