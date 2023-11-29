@@ -17,9 +17,6 @@ public class DefectLogViewController {
 	private Stage stage;
 	private Scene scene;
 	
-	@FXML
-	private Button returnButton;
-	
 	private ArrayList<Defect> array;
 	private ArrayList<Effort> effort;
 	private ID currentID = new ID();

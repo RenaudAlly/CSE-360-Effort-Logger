@@ -44,7 +44,7 @@ public class EffortLoggerConsoleController {
 	private Scene scene;
 	private Stage stage;
 	private String currentDate, currentYear, currentMonth, currentDay;
-	private Effort e;
+	private Effort effort;
 	private ID currentID = new ID();
 	private ArrayList<Effort> effortList = new ArrayList<Effort>();
 	private ArrayList<Defect> defectList = new ArrayList<Defect>();
@@ -172,7 +172,7 @@ public class EffortLoggerConsoleController {
 			}
 		}
 		
-		e = new Effort();
+		effort = new Effort();
 		
 		stopTime = LocalTime.now();
 		stoptime = (stopTime.getHour() * 3600) + (stopTime.getMinute() * 60) + stopTime.getSecond();
@@ -185,8 +185,6 @@ public class EffortLoggerConsoleController {
 		loggedtime = loggedtime % 60;
 		secondsLogged = loggedtime;
 		
-		
-		
 		startDate = LocalDate.now();
 		
 		currentDay = Integer.toString(startDate.getDayOfMonth());
@@ -195,16 +193,16 @@ public class EffortLoggerConsoleController {
 		
 		currentDate = currentYear + "-" + currentMonth + "-" + currentDay;
 		
-		e.setStopTime(stopTime.getHour() + ":" + stopTime.getMinute() + ":" + stopTime.getSecond());
-		e.setStartTime(startTime.getHour() + ":" + startTime.getMinute() + ":" + startTime.getSecond());
-		e.setTimeLogged(currentDate);
-		e.setEffortCategory(effortCategoryComboBox.getValue());
-		e.setLifeCycle(lifeCycleStepsComboBox.getValue());
-		e.setPlan(planComboBox.getValue());
-		e.setProjectName(projectComboBox.getValue());
-		e.setEffortName(effortTextField.getText());
+		effort.setStopTime(stopTime.getHour() + ":" + stopTime.getMinute() + ":" + stopTime.getSecond());
+		effort.setStartTime(startTime.getHour() + ":" + startTime.getMinute() + ":" + startTime.getSecond());
+		effort.setTimeLogged(currentDate);
+		effort.setEffortCategory(effortCategoryComboBox.getValue());
+		effort.setLifeCycle(lifeCycleStepsComboBox.getValue());
+		effort.setPlan(planComboBox.getValue());
+		effort.setProjectName(projectComboBox.getValue());
+		effort.setEffortName(effortTextField.getText());
 		
-		effortList.add(e);
+		effortList.add(effort);
 	}
 	
 	public void ToDefectLogConsole(ActionEvent event) throws IOException {

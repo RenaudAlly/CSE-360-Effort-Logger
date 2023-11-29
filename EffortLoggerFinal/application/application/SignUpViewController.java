@@ -21,8 +21,10 @@ public class SignUpViewController {
 	private PasswordField passwordInput;
 	@FXML
 	private ComboBox<String> comboBoxInput;
+	@FXML
+	private Button createAccountButton;
 
-	public void SignUpButtonOnAction(ActionEvent event) throws IOException {
+	public void CreateAccountButtonOnAction(ActionEvent event) throws IOException {
 		
 		ID newuser = new ID();
 		

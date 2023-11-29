@@ -117,15 +117,25 @@ public class EffortLogEditorController {
 	
 	public void ClearEffortLog(ActionEvent event) throws IOException {
 		if (effortList.isEmpty()) return;
+		if(projectComboBox.getValue() == null) return;
 		
-		int size = effortList.size();
-		
-		if (projectComboBox.getValue() == null) return;
-	
-		for (int i = 0; i < size; i++) {
-			int index = indexOfEffort(projectComboBox.getValue());
-			effortList.remove(index);
+		if (projectComboBox.getValue() != null) {
+			
+			String projname = projectComboBox.getValue().toString();
+			int size = effortList.size();
+			int removed = 0;
+			
+			for (int i = 0; i < size; i++) {
+				if (i == size) return;
+				if (effortList.get(i-removed).getProjectName() != null) {
+					if (effortList.get(i-removed).getProjectName().toString().equals(projname)) {
+						effortList.remove(i-removed);
+						removed++;	
+					}	
+				}	
+			}
 		}
+		ToEffortLogConsole(event);
 	}
 	
 	public int indexOfEffort(String projectName) {
@@ -187,6 +197,7 @@ public class EffortLogEditorController {
 		
 		int index = indexOfEffortName(effortLogEntryComboBox.getValue());
 		effortList.remove(index);
+		ToEffortLogConsole(event);
 	}
 
 	public int indexOfEffortName(String value) {

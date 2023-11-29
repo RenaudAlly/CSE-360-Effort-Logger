@@ -118,7 +118,13 @@ public class DefectViewController {
 			int size = array.size();
 			int removed = 0;
 			
-			for (int i = 0; i < size-removed; i++) {
+			for (int i = 0; i < size; i++) {
+				
+				if (i == size) {
+					
+					return;
+					
+				}
 				
 				if (array.get(i-removed).getProject() != null) {
 					

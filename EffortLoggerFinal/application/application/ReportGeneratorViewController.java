@@ -36,9 +36,10 @@ public class ReportGeneratorViewController {
 	private ArrayList<Effort> effortList = new ArrayList<Effort>();
 	private ArrayList<Defect> defectList = new ArrayList<Defect>();
 	
-	public void SetUserReportGenerator(ID newID) {
-		currentID = newID;
-		validUsername = newID.getUser();
+	public void SetUserReportGenerator(ID validUserID) {
+		
+		currentID = validUserID;
+		validUsername = currentID.getUser();
 
 	}
 	
