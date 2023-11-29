@@ -42,7 +42,7 @@ public class LoginViewController {
 	}
 	
 	public void SignUpButtonOnAction(ActionEvent event) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReportGeneratorPage.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SignUpScreen.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(fxmlLoader.load(), 750, 500);
 		stage.setTitle("Sign Up Page");

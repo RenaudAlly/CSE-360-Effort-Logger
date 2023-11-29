@@ -150,10 +150,14 @@ public class EffortLoggerConsoleController {
 	}
 	
 	public void StopActivity(ActionEvent event) throws IOException {
-		if(!timerStartedBool) {
-			
-			return;
-		}
+		if(!timerStartedBool) return;
+		
+		if (lifeCycleStepsComboBox.getValue() == null) return;
+		if (effortCategoryComboBox.getValue() == null) return;
+		if (planComboBox.getValue() == null) return;
+		if (projectComboBox.getValue() == null) return;
+		if (effortTextField.getText() == null) return;
+		
 		clockLabel.setText("Clock is Stopped");
 		clockLabel.setStyle("-fx-text-fill: red;");
 		int size = effortList.size();

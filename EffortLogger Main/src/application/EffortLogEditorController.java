@@ -23,9 +23,13 @@ import javafx.stage.Stage;
 
 public class EffortLogEditorController {
 	@FXML
-	private ComboBox<String> projectComboBox, effortLogEntryComboBox, lifeCycleStepComboBox, effortCategoryComboBox, planComboBox;
+	private ComboBox<String> projectComboBox, effortLogEntryComboBox, 
+							 lifeCycleStepComboBox, effortCategoryComboBox, 
+							 planComboBox;
 	@FXML
-	private Button clearEffortLogButton, updateEntryButton, deleteEntryButton, toEffortLogConsoleButton, loadProjectsButton;
+	private Button clearEffortLogButton, updateEntryButton, 
+				   deleteEntryButton, toEffortLogConsoleButton, 
+				   loadProjectsButton;
 	@FXML
 	private TextField dateTextField, startTimeTextField, stopTimeTextField;
 	@FXML
@@ -151,6 +155,12 @@ public class EffortLogEditorController {
 	}
 	
 	public void UpdateThisEntry(ActionEvent event) throws IOException {
+		if (projectComboBox.getValue() == null) return;
+		if (effortCategoryComboBox.getValue() == null) return;
+		if (effortLogEntryComboBox.getValue() == null) return;
+		if (lifeCycleStepComboBox.getValue() == null) return;
+		if (planComboBox.getValue() == null) return;
+		
 		for(int i = 0; i < effortList.size(); i++) {
 			String entryName = effortLogEntryComboBox.getValue();
 			if (entryName.equals(effortList.get(i).getEffortName())) {
