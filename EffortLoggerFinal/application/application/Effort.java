@@ -27,7 +27,7 @@ public class Effort {
 		this.startTime = startTime;
 		this.stopTime = stopTime;
 	}
-
+	
 	public String getTimeLogged() {
 		return timeLogged;
 	}
@@ -41,7 +41,11 @@ public class Effort {
 	}
 
 	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+		if (projectName.isEmpty()) {
+			this.projectName = "Default";
+		} else {
+			this.projectName = projectName;
+		}
 	}
 
 	public String getLifeCycle() {
@@ -49,7 +53,11 @@ public class Effort {
 	}
 
 	public void setLifeCycle(String lifeCycle) {
-		this.lifeCycle = lifeCycle;
+		if (lifeCycle.isEmpty()) {
+			this.lifeCycle = "Default";
+		} else {
+			this.lifeCycle = lifeCycle;
+		}
 	}
 
 	public String getEffortCategory() {
@@ -57,7 +65,11 @@ public class Effort {
 	}
 
 	public void setEffortCategory(String effortCategory) {
-		this.effortCategory = effortCategory;
+		if (effortCategory.isEmpty()) {
+			this.effortCategory = "Default";
+		} else {
+			this.effortCategory = effortCategory;
+		}
 	}
 
 	public String getPlan() {
@@ -70,8 +82,7 @@ public class Effort {
 
     public String[] getArray() {
 
-        effort = new String[]{timeLogged, projectName, effortCategory, plan, effortName};
-
+        effort = new String[]{effortName, timeLogged, projectName, lifeCycle, effortCategory, plan, startTime, stopTime};
         return effort;
 
     }
@@ -97,6 +108,10 @@ public class Effort {
 	}
 
 	public void setEffortName(String effortName) {
-		this.effortName = effortName;
+		if (effortName.isEmpty()) {
+			this.effortName = "Default";
+		} else {
+			this.effortName = effortName;
+		}
 	}
 }

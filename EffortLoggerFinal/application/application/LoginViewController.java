@@ -8,10 +8,12 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-
-
+import java.util.Scanner;
 
 public class LoginViewController {
 	private Scene scene;
@@ -49,8 +51,6 @@ public class LoginViewController {
 		
 		stage.setScene(scene);
 		stage.show();
-		
-	
 	}
 	
 	public void LogInButtonOnAction(ActionEvent event) throws IOException {
@@ -123,27 +123,24 @@ public class LoginViewController {
 						break;
 						
 					}
-					else {
-						
+					else {		
 						SignUpText.setText("Your account does not have permission.");
 						perm = true;
-						break;
-						
-					}
-					
+						break;	
+					}	
 				}
-				
 			}
-			
 			
 			
 			// if found is true, meaning the username and password are valid
 			if (found == true) {
 				
+				// TODO: Silently import if effort and defect logs exist
+				importData(effortList, defectList);
+				
 				String go = ComboBoxInput.getValue().toString();
 				
 				if (go.equals("Effort Logger")) {
-					
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("EffortLoggerConsole.fxml"));
 					stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 					scene = new Scene(fxmlLoader.load(), 750, 500);
@@ -159,7 +156,6 @@ public class LoginViewController {
 					
 				}
 				else if(go.equals("Planning Poker")){
-					
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("PlanningPoker.fxml"));
 					stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 					scene = new Scene(fxmlLoader.load(), 750, 500);
@@ -172,42 +168,54 @@ public class LoginViewController {
 					
 					stage.setScene(scene);
 					stage.show();
-					
-					
 				}
-				
-				
 			}
 			
 			// if the username or password is not valid
 			else {
-				
 				if (perm == false) {
 					
 					// display an invalid message that tells the user to try again
 					SignUpText.setText("Invalid Username or Password! Please try again. ");
-					
 				}
-				
 			}
-		
-		
 		}
+	}
 	
-	/*
-	FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DisplayPage.fxml"));
-	login.setName(usernameField.getText());
-	login.setPassword(passwordField.getText());
-
-	stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-	scene = new Scene(fxmlLoader.load(), 900, 600);
-	stage.setTitle("Login Info");
-
-	DisplayViewController control = fxmlLoader.getController();
-	control.setLogin(login);
-	stage.setScene(scene);
-	stage.show()
-	*/
+	public void importData(ArrayList<Effort> effortLogs, ArrayList<Defect> defectLogs) throws IOException {
+		// WARNING: Note that we are assuming the user does not rename their CSV file
+		try {
+			File effortLogsFile = new File("Effort_Logs.csv");
+			File defectLogsFile = new File("Defect_Logs.csv");		
+			Scanner effortLogListPopulatorScanner = new Scanner(effortLogsFile);
+			Scanner defectLogListPopulatorScanner = new Scanner(defectLogsFile);
+			
+			effortLogListPopulatorScanner.nextLine();
+			while (effortLogListPopulatorScanner.hasNext()) {
+				String[] oStrings = effortLogListPopulatorScanner.nextLine().split(",");
+				effortList.add(new Effort(oStrings[0], oStrings[1], oStrings[2], oStrings[3], oStrings[4],
+										oStrings[5], oStrings[6], oStrings[7]));
+			}
+			
+			defectLogListPopulatorScanner.nextLine();
+			while (defectLogListPopulatorScanner.hasNext()) {
+				String[] oStrings = effortLogListPopulatorScanner.nextLine().split(",");
+				defectLogs.add(new Defect(oStrings[0], oStrings[1], oStrings[2], oStrings[3], oStrings[4],
+										oStrings[5], oStrings[6]));
+			}
+			
+			// Reading Defect Logs
+			effortLogListPopulatorScanner.close();
+			defectLogListPopulatorScanner.close();
+			
+		} 
+		catch (FileNotFoundException e) {
+			System.out.println("We cold not find the effort or defect log CSV files in your current directory. Skill issue.");
+			e.printStackTrace();
+		}
+		catch (IOException e) {
+			System.out.println("An unexpected error occured. Skill issue on our end.");
+		}
 	}
 	
 }

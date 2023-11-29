@@ -21,13 +21,13 @@ public class Defect {
 	
 	public Defect() {
 		
-		this.name = "";
-		this.category = "";
-		this.inject = "";
-		this.remove = "";
-		this.status = "";
-		this.symptoms = "";
-		this.project = "";
+		this.name = "Default";
+		this.category = "Not Specified";
+		this.inject = "Planning";
+		this.remove = "Planning";
+		this.status = "Default";
+		this.symptoms = "Default";
+		this.project = "Default";
 		
 	}
 	
@@ -44,39 +44,54 @@ public class Defect {
 	}
 	
 	public void setName(String s) {
-		
-		this.name = s;
+		if (s.isEmpty()) {
+			this.name = "Default";
+		} else {
+			this.name = s;	
+		}
 		
 	}
 	public void setCategory(String s) {
-		
-		this.category = s;
-		
+		if (s.isEmpty()) {
+			this.category = "Not Specified";	
+		} else {
+			this.name = s;
+		}
 	}
 	public void setInject(String s) {
-	
-		this.inject = s;
-	
+		if (s.isEmpty()) {
+			this.inject = "Planning";	
+		} else {
+			this.inject = s;
+		}	
 	}
 	public void setRemove(String s) {
-	
-		this.remove = s;
-	
+		if (s.isEmpty()) {
+			this.remove = "Planning";	
+		} else {
+			this.remove = s;
+		}	
 	}
 	public void setStatus(String s) {
-	
-		this.status = s;
-	
+		if (s.isEmpty()) {
+			this.status = "Default";	
+		} else {
+			this.status = s;
+		}	
 	}
 	public void setSymptoms(String s) {
-	
-		this.symptoms = s;
-	
+		if (s.isEmpty()) {
+			this.symptoms = "Default";	
+		} else {
+			this.symptoms = s;
+		}	
 	}
 	public void setProject(String s) {
-		
-		this.project = s;
-	
+		if (s.isEmpty()) {
+			this.project = "Default";	
+		} else {
+			this.project = s;
+		}	
 	}
 	public String getName() {
 		

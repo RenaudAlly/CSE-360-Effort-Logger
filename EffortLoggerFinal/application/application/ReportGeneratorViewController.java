@@ -48,10 +48,10 @@ public class ReportGeneratorViewController {
 	}
 	
 	public void SetDefectList(ArrayList<Defect> newList) {
-		
 		defectList = newList;
-		
-	}	public void EnteredEmployeeID(ActionEvent event) throws IOException {
+	}	
+	
+	public void EnteredEmployeeID(ActionEvent event) throws IOException {
 		// comparing text field content with initial user name
 		if (validUsername.equals(employeeID.getText())) {
 			employeeIDConfirmation.setText("You have entered the correct employee ID");
@@ -63,13 +63,9 @@ public class ReportGeneratorViewController {
 	}
 	
 	public void CreateDefectLogsReport(ActionEvent event) throws IOException {
-		// TODO: Temporary mock data
-		defectList.add(new Defect("Additional comments were added", "Documentation", "Effort Logger", "Information gathering", "Information gathering", "Closed", "Only clarifiaction"));
-		defectList.add(new Defect("Delegating responsibilities", "Assignment", "Planning Poker", "Planning", "Outlining", "Open", "Some team members left"));
-		
 		// Converting defect array list to a string array list
 		ArrayList<String[]> defectLogs = new ArrayList<String[]>();
-		defectLogs.add(new String[]{"Defect Name", "Defect Category", "Project Name", "Inject Step", "Remove Step", "Status", "Defect Symptoms"});
+		defectLogs.add(new String[]{"Defect Name", "Defect Category", "Inject Step", "Remove Step", "Status", "Defect Symptoms", "Project Name"});
 		for (Defect defectLog : defectList) {
 			defectLogs.add(defectLog.getArray());
 		}
@@ -100,12 +96,10 @@ public class ReportGeneratorViewController {
         stage.setScene(scene);
         stage.show();
 	}
-	public void CreateEffortLogsReport(ActionEvent event) throws IOException {
-		// TODO: Temporary mock data
-		
+	public void CreateEffortLogsReport(ActionEvent event) throws IOException {		
 		// Converting effort log array list to a string array list
 		ArrayList<String[]> effortLogs = new ArrayList<String[]>();
-		effortLogs.add(new String[]{"Effort Log Name", "Time Logged", "Project name", "Effort Category", "Plan"});
+		effortLogs.add(new String[]{"Effort Name", "Time Logged", "Project Name", "Life Cycle", "Effort Category", "Plan", "Start Time", "Stop Time"});
 		for (Effort effortLog : effortList) {
 			effortLogs.add(effortLog.getArray());
 		}

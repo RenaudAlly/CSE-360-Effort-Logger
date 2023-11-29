@@ -282,9 +282,10 @@ public class EffortLoggerConsoleController {
 		
 		LoginViewController controller = loader.getController();
 		controller.SetUserLoginScreen(currentID);
-		controller.SetEffortList(effortList);
-		controller.SetDefectList(defectList);
-		
+		// TODO: As soon as logout is clicked, we want to clear the effort and defect logs
+//		controller.SetEffortList(effortList);
+//		controller.SetDefectList(defectList);
+
 		stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
         stage.setScene(scene);
