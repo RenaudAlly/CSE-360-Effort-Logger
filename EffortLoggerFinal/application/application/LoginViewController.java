@@ -211,7 +211,6 @@ public class LoginViewController {
 		} 
 		catch (FileNotFoundException e) {
 			System.out.println("We cold not find the effort or defect log CSV files in your current directory. Skill issue.");
-			e.printStackTrace();
 		}
 		catch (IOException e) {
 			System.out.println("An unexpected error occured. Skill issue on our end.");
