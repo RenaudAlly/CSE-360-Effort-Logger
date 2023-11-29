@@ -157,7 +157,8 @@ public class EffortLoggerConsoleController {
 		if (planComboBox.getValue() == null) return;
 		if (projectComboBox.getValue() == null) return;
 		if (effortTextField.getText() == null) return;
-		
+		if(effortTextField.getText().isEmpty()) return;
+
 		clockLabel.setText("Clock is Stopped");
 		clockLabel.setStyle("-fx-text-fill: red;");
 		int size = effortList.size();
