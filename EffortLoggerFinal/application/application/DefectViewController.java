@@ -31,13 +31,13 @@ public class DefectViewController {
 	private int index;
 	
 	@FXML
-	private Label DefectLabel;
+	private Label defectLabel;
 	@FXML
-	private Label StatusText;
+	private Label statusText;
 	@FXML
-	private TextField NameInput;
+	private TextField nameInput;
 	@FXML
-	private TextField DescriptionInput;
+	private TextField descriptionInput;
 	@FXML	
 	private ComboBox<String> injectComboBox, categoryComboBox, removeComboBox, fixComboBox, defectComboBox, projectComboBox;
 
@@ -107,7 +107,7 @@ public class DefectViewController {
 		ObservableList<String> list = FXCollections.observableArrayList(relevant);
 		defectComboBox.setItems(list);
 	
-		DefectLabel.setText(Integer.toString(relevant.size()) + " defects for this project.");
+		defectLabel.setText(Integer.toString(relevant.size()) + " defects for this project.");
 		
 	}
 	public void ClearOnAction(ActionEvent event) throws IOException {
@@ -153,11 +153,11 @@ public class DefectViewController {
 	
 	public void CreateOnAction(ActionEvent event) throws IOException {
 		
-		StatusText.setText("Status: Open");
+		statusText.setText("Status: Open");
 		edit = false;
 		closed = false;
-		NameInput.clear();
-		DescriptionInput.clear();
+		nameInput.clear();
+		descriptionInput.clear();
 		injectComboBox.setValue(null);
 		removeComboBox.setValue(null);
 		categoryComboBox.setValue(null);
@@ -168,13 +168,13 @@ public class DefectViewController {
 	public void CloseOnAction(ActionEvent event) throws IOException {
 		
 		closed = true;
-		StatusText.setText("Status: Closed");
+		statusText.setText("Status: Closed");
 		
 	}
 	public void ReopenOnAction(ActionEvent event) throws IOException {
 		
 		closed = false;
-		StatusText.setText("Status: Open");
+		statusText.setText("Status: Open");
 		
 	} 
 	public void UpdateOnAction(ActionEvent event) throws IOException {
@@ -230,8 +230,8 @@ public class DefectViewController {
 				
 			}
 
-			defect.setName(NameInput.getText().toString());
-			defect.setSymptoms(DescriptionInput.getText().toString());
+			defect.setName(nameInput.getText().toString());
+			defect.setSymptoms(descriptionInput.getText().toString());
 			
 			if (closed == true) {
 				
@@ -283,13 +283,13 @@ public class DefectViewController {
 		
 		else if (edit == true) {
 			
-			if (NameInput.getText().toString().length() > 0) {
+			if (nameInput.getText().toString().length() > 0) {
 				
 				boolean found = false;
 				
 				for (int i = 0; i < array.size(); i++) {
 					
-					if (NameInput.getText().toString().equals(array.get(i).getName())) {
+					if (nameInput.getText().toString().equals(array.get(i).getName())) {
 						
 						found = true;
 						
@@ -340,8 +340,8 @@ public class DefectViewController {
 						
 					}
 
-					array.get(index).setName(NameInput.getText().toString());
-					array.get(index).setSymptoms(DescriptionInput.getText().toString());
+					array.get(index).setName(nameInput.getText().toString());
+					array.get(index).setSymptoms(descriptionInput.getText().toString());
 					
 					if (closed == true) {
 						
@@ -380,9 +380,9 @@ public class DefectViewController {
 	public void DeleteOnAction(ActionEvent event) throws IOException {
 		
 		// add functionality to delete the selected defect
-		StatusText.setText("Status: Closed");
-		NameInput.clear();
-		DescriptionInput.clear();
+		statusText.setText("Status: Closed");
+		nameInput.clear();
+		descriptionInput.clear();
 		injectComboBox.setValue(null);
 		removeComboBox.setValue(null);
 		categoryComboBox.setValue(null);
