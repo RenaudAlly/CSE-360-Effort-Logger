@@ -14,6 +14,11 @@ public class ID {
 		
 	}
 	
+	@Override
+	public String toString() {
+		return user + "," + pass + "," + String.valueOf(level);
+	}
+	
 	public String getUser() {
 		
 		return user;

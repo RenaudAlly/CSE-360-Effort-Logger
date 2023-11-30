@@ -89,7 +89,13 @@ public class LoginViewController {
 		ID useridfinal = new ID();
 				
 		// the array of credentials
-		ID[] arr = new ID[]{userid, userid2, userid3, userid4, userid5};
+		ArrayList<ID> usersArrayList = new ArrayList<ID>();
+		usersArrayList.add(userid);
+		usersArrayList.add(userid2);
+		usersArrayList.add(userid3);
+		usersArrayList.add(userid4);
+		usersArrayList.add(userid5);
+//		ID[] arr = new ID[]{userid, userid2, userid3, userid4, userid5};
 		// save the username input and password input to string
 		String username = usernameInput.getText().toString();
 		String password = passwordInput.getText().toString();
@@ -114,13 +120,13 @@ public class LoginViewController {
 			for (int i = 0; i < 5; i++) {
 				
 				// if the username password combo is in this element of the array
-				if (username.equals(arr[i].getUser()) && password.equals(arr[i].getPass())) {
+				if (username.equals(usersArrayList.get(i).getUser()) && password.equals(usersArrayList.get(i).getPass())) {
 					
-					if (arr[i].getLevel() != 0) {
+					if (usersArrayList.get(i).getLevel() != 0) {
 						
 						// update found to be true
 						found = true;
-						useridfinal = arr[i];
+						useridfinal = usersArrayList.get(i);
 						break;
 						
 					}

@@ -58,6 +58,9 @@ public class SignUpViewController {
 				
 			}
 			
+			// Adds created user to a CSV file which contains all the valid users
+			System.out.println(newuser.toString());
+			
 		}
 		
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoginScreen.fxml"));
