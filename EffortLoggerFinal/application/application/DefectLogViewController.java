@@ -17,50 +17,51 @@ public class DefectLogViewController {
 	private Stage stage;
 	private Scene scene;
 	
-	private ArrayList<Defect> array;
-	private ArrayList<Effort> effort;
+	private ArrayList<Defect> defectList;
+	private ArrayList<Effort> effortList;
 	private ID currentID = new ID();
 	
 	@FXML
-	private TableColumn<Defect, String> defectName, defectCategory, injectStep, removeStep, status, defectSymptoms, project;
+	private TableColumn<Defect, String> defectNameColumn, defectCategoryColumn, projectColumn, injectStepColumn, removeStepColumn, statusColumn, defectSymptomsColumn;
 	@FXML
-	private TableView<Defect> defectLog;
+	private TableView<Defect> defectLogTable;
 	
 	public void SetUserDefectLog(ID newID) {
 		currentID = newID;
 	}
 	
-	public void setArray(ArrayList<Defect> array) {
+	public void setEffortList(ArrayList<Effort> effort) {
 		
-		this.array = array;
+		this.effortList = effort;
 		
-		if (this.array.isEmpty()) {
+	}
+
+	public void setDefectList(ArrayList<Defect> array) {
+		
+		this.defectList = array;
+		
+		if (this.defectList.isEmpty()) {
 			
 			return;
 			
 		}
 		else {
 		
-			defectName.setCellValueFactory(new PropertyValueFactory<Defect, String>("name"));
-			defectCategory.setCellValueFactory(new PropertyValueFactory<Defect, String>("category"));
-			injectStep.setCellValueFactory(new PropertyValueFactory<Defect, String>("inject"));
-			removeStep.setCellValueFactory(new PropertyValueFactory<Defect, String>("remove"));
-			status.setCellValueFactory(new PropertyValueFactory<Defect, String>("status"));
-			defectSymptoms.setCellValueFactory(new PropertyValueFactory<Defect, String>("symptoms"));
-			project.setCellValueFactory(new PropertyValueFactory<Defect, String>("project"));
+			defectNameColumn.setCellValueFactory(new PropertyValueFactory<Defect, String>("name"));
+			defectCategoryColumn.setCellValueFactory(new PropertyValueFactory<Defect, String>("category"));
+			injectStepColumn.setCellValueFactory(new PropertyValueFactory<Defect, String>("inject"));
+			removeStepColumn.setCellValueFactory(new PropertyValueFactory<Defect, String>("remove"));
+			statusColumn.setCellValueFactory(new PropertyValueFactory<Defect, String>("status"));
+			defectSymptomsColumn.setCellValueFactory(new PropertyValueFactory<Defect, String>("symptoms"));
+			projectColumn.setCellValueFactory(new PropertyValueFactory<Defect, String>("project"));
 
-			ObservableList<Defect> list = FXCollections.observableArrayList(this.array);
-			defectLog.setItems(list);
+			ObservableList<Defect> list = FXCollections.observableArrayList(this.defectList);
+			defectLogTable.setItems(list);
 			
 		}
 		
 	}
 	
-	public void setEffort(ArrayList<Effort> effort) {
-		
-		this.effort = effort;
-		
-	}
 	
 	public void ReturnOnAction(ActionEvent event) throws IOException {
 		
@@ -71,8 +72,8 @@ public class DefectLogViewController {
 		
 		DefectViewController control = fxmlLoader.getController();
 		control.SetUserDefectConsole(currentID);
-		control.setEffort(effort);
-		control.setArray(array);
+		control.setEffortList(effortList);
+		control.setDefectList(defectList);
 		stage.setScene(scene);
 		stage.show();
 		

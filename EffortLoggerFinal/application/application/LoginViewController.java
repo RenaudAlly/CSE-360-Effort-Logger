@@ -137,7 +137,7 @@ public class LoginViewController {
 			if (found == true) {
 				
 				// TODO: Silently import if effort and defect logs exist
-				importData(effortList, defectList);
+				ImportData(effortList, defectList);
 				
 				String go = comboBoxInput.getValue().toString();
 				
@@ -183,7 +183,7 @@ public class LoginViewController {
 		}
 	}
 	
-	public void importData(ArrayList<Effort> effortLogs, ArrayList<Defect> defectLogs) throws IOException {
+	public void ImportData(ArrayList<Effort> effortLogs, ArrayList<Defect> defectLogs) throws IOException {
 		// WARNING: Note that we are assuming the user does not rename their CSV file
 		try {
 			File effortLogsFile = new File("Effort_Logs.csv");
@@ -200,11 +200,11 @@ public class LoginViewController {
 			
 			defectLogListPopulatorScanner.nextLine();
 			while (defectLogListPopulatorScanner.hasNext()) {
-				String[] oStrings = effortLogListPopulatorScanner.nextLine().split(",");
+				String[] oStrings = defectLogListPopulatorScanner.nextLine().split(",");
 				defectLogs.add(new Defect(oStrings[0], oStrings[1], oStrings[2], oStrings[3], oStrings[4],
 										oStrings[5], oStrings[6]));
 			}
-			
+		
 			// Reading Defect Logs
 			effortLogListPopulatorScanner.close();
 			defectLogListPopulatorScanner.close();
@@ -213,6 +213,10 @@ public class LoginViewController {
 		catch (FileNotFoundException e) {
 			System.out.println("We cold not find the effort or defect log CSV files in your current directory. Skill issue.");
 		}
+		catch (IOException e) {
+			System.out.println("We cold not find the effort or defect log CSV files in your current directory. Skill issue.");
+		}
+
 	}
 	
 }

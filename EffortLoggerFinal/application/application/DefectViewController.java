@@ -24,20 +24,20 @@ public class DefectViewController {
 	private ID currentID = new ID();
 	private boolean closed = false;
 	private boolean edit = false;
-	private boolean arrayexists = false;
-	private ArrayList<Defect> array;
-	private ArrayList<Effort> effort;
+	private boolean listExists = false;
+	private ArrayList<Defect> defectList;
+	private ArrayList<Effort> effortList;
 	private Defect defect;
 	private int index;
 	
 	@FXML
 	private Label defectLabel;
 	@FXML
-	private Label statusText;
+	private Label statusLabel;
 	@FXML
-	private TextField nameInput;
+	private TextField nameTextField;
 	@FXML
-	private TextField descriptionInput;
+	private TextField descriptionTextField;
 	@FXML	
 	private ComboBox<String> injectComboBox, categoryComboBox, removeComboBox, fixComboBox, defectComboBox, projectComboBox;
 
@@ -62,39 +62,39 @@ public class DefectViewController {
 		currentID = newID;
 	}
 	
-	public void setArray(ArrayList<Defect> array) {
+	public void setDefectList(ArrayList<Defect> newDefect) {
 		
-		this.array = array;
-		arrayexists = true;
+		this.defectList = newDefect;
+		listExists = true;
 		
 	}
-	public void setEffort(ArrayList<Effort> array) {
+	public void setEffortList(ArrayList<Effort> newEffort) {
 		
-		this.effort = array;
+		this.effortList = newEffort;
 		
 	}
 	
 	public void ProjectOnAction(ActionEvent event) throws IOException {
-		if (arrayexists == false) {
+		if (listExists == false) {
 			
-			array = new ArrayList<Defect>();
-			arrayexists = true;
+			defectList = new ArrayList<Defect>();
+			listExists = true;
 			
 		}
 
-		ArrayList<String> relevant = new ArrayList<String>();
+		ArrayList<String> relevantDefectsList = new ArrayList<String>();
 		if (projectComboBox.getValue() != null) {
 			
-			String projname = projectComboBox.getValue().toString();
-			int size = array.size();
+			String projectName = projectComboBox.getValue().toString();
+			int size = defectList.size();
 			
 			for (int i = 0; i < size; i++) {
 				
-				if (array.get(i).getProject() != null) {
+				if (defectList.get(i).getProject() != null) {
 					
-					if (array.get(i).getProject().toString().equals(projname)) {
+					if (defectList.get(i).getProject().toString().equals(projectName)) {
 						
-						relevant.add(array.get(i).getName());
+						relevantDefectsList.add(defectList.get(i).getName());
 						
 					}
 					
@@ -104,10 +104,10 @@ public class DefectViewController {
 			
 		}
 		
-		ObservableList<String> list = FXCollections.observableArrayList(relevant);
+		ObservableList<String> list = FXCollections.observableArrayList(relevantDefectsList);
 		defectComboBox.setItems(list);
 	
-		defectLabel.setText(Integer.toString(relevant.size()) + " defects for this project.");
+		defectLabel.setText(Integer.toString(relevantDefectsList.size()) + " defects for this project.");
 		
 	}
 	public void ClearOnAction(ActionEvent event) throws IOException {
@@ -115,7 +115,7 @@ public class DefectViewController {
 		if (projectComboBox.getValue() != null) {
 			
 			String projname = projectComboBox.getValue().toString();
-			int size = array.size();
+			int size = defectList.size();
 			int removed = 0;
 			
 			for (int i = 0; i < size; i++) {
@@ -126,11 +126,11 @@ public class DefectViewController {
 					
 				}
 				
-				if (array.get(i-removed).getProject() != null) {
+				if (defectList.get(i-removed).getProject() != null) {
 					
-					if (array.get(i-removed).getProject().toString().equals(projname)) {
+					if (defectList.get(i-removed).getProject().toString().equals(projname)) {
 						
-						array.remove(i-removed);
+						defectList.remove(i-removed);
 						removed++;
 						
 					}
@@ -148,8 +148,8 @@ public class DefectViewController {
 		
 		
 		DefectLogViewController control = fxmlLoader.getController();
-		control.setEffort(effort);
-		control.setArray(array);
+		control.setEffortList(effortList);
+		control.setDefectList(defectList);
 		control.SetUserDefectLog(currentID);
 		stage.setScene(scene);
 		stage.show();
@@ -160,11 +160,11 @@ public class DefectViewController {
 	
 	public void CreateOnAction(ActionEvent event) throws IOException {
 		
-		statusText.setText("Status: Open");
+		statusLabel.setText("Status: Open");
 		edit = false;
 		closed = false;
-		nameInput.clear();
-		descriptionInput.clear();
+		nameTextField.clear();
+		descriptionTextField.clear();
 		injectComboBox.setValue(null);
 		removeComboBox.setValue(null);
 		categoryComboBox.setValue(null);
@@ -175,13 +175,13 @@ public class DefectViewController {
 	public void CloseOnAction(ActionEvent event) throws IOException {
 		
 		closed = true;
-		statusText.setText("Status: Closed");
+		statusLabel.setText("Status: Closed");
 		
 	}
 	public void ReopenOnAction(ActionEvent event) throws IOException {
 		
 		closed = false;
-		statusText.setText("Status: Open");
+		statusLabel.setText("Status: Open");
 		
 	} 
 	public void UpdateOnAction(ActionEvent event) throws IOException {
@@ -189,10 +189,10 @@ public class DefectViewController {
 		if (edit == false) {
 			
 			defect = new Defect();
-			if (arrayexists == false) {
+			if (listExists == false) {
 				
-				array = new ArrayList<Defect>();
-				arrayexists = true;
+				defectList = new ArrayList<Defect>();
+				listExists = true;
 				
 			}
 				
@@ -237,8 +237,8 @@ public class DefectViewController {
 				
 			}
 
-			defect.setName(nameInput.getText().toString());
-			defect.setSymptoms(descriptionInput.getText().toString());
+			defect.setName(nameTextField.getText().toString());
+			defect.setSymptoms(descriptionTextField.getText());
 			
 			if (closed == true) {
 				
@@ -255,9 +255,9 @@ public class DefectViewController {
 				
 				boolean found = false;
 				
-				for (int i = 0; i < array.size(); i++) {
+				for (int i = 0; i < defectList.size(); i++) {
 					
-					if (defect.getName().equals(array.get(i).getName())) {
+					if (defect.getName().equals(defectList.get(i).getName())) {
 						
 						found = true;
 						
@@ -267,7 +267,7 @@ public class DefectViewController {
 				
 				if (found == false) {
 					
-					array.add(defect);
+					defectList.add(defect);
 					
 					FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("DefectLog.fxml"));
 					stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -276,8 +276,8 @@ public class DefectViewController {
 					
 					
 					DefectLogViewController control = fxmlLoader.getController();
-					control.setEffort(effort);
-					control.setArray(array);
+					control.setEffortList(effortList);
+					control.setDefectList(defectList);
 					control.SetUserDefectLog(currentID);
 					stage.setScene(scene);
 					stage.show();
@@ -291,13 +291,13 @@ public class DefectViewController {
 		
 		else if (edit == true) {
 			
-			if (nameInput.getText().toString().length() > 0) {
+			if (nameTextField.getText().toString().length() > 0) {
 				
 				boolean found = false;
 				
-				for (int i = 0; i < array.size(); i++) {
+				for (int i = 0; i < defectList.size(); i++) {
 					
-					if (nameInput.getText().toString().equals(array.get(i).getName())) {
+					if (nameTextField.getText().toString().equals(defectList.get(i).getName())) {
 						
 						found = true;
 						
@@ -309,56 +309,56 @@ public class DefectViewController {
 					
 					if (categoryComboBox.getValue() != null) {
 						
-						array.get(index).setCategory(categoryComboBox.getValue().toString());
+						defectList.get(index).setCategory(categoryComboBox.getValue().toString());
 						
 					}
 					else {
 						
-						array.get(index).setCategory("");
+						defectList.get(index).setCategory("");
 						
 					}
 					if (injectComboBox.getValue() != null) {
 						
-						array.get(index).setInject(injectComboBox.getValue().toString());
+						defectList.get(index).setInject(injectComboBox.getValue().toString());
 					
 					}
 					else {
 						
-						array.get(index).setInject("");
+						defectList.get(index).setInject("");
 						
 					}
 					if (removeComboBox.getValue() != null) {
 						
-						array.get(index).setRemove(removeComboBox.getValue().toString());
+						defectList.get(index).setRemove(removeComboBox.getValue().toString());
 					
 					}
 					else {
 						
-						array.get(index).setRemove("");
+						defectList.get(index).setRemove("");
 						
 					}
 					if (projectComboBox.getValue() != null) {
 						
-						array.get(index).setProject(projectComboBox.getValue().toString());
+						defectList.get(index).setProject(projectComboBox.getValue().toString());
 					
 					}
 					else {
 						
-						array.get(index).setProject("None");
+						defectList.get(index).setProject("None");
 						
 					}
 
-					array.get(index).setName(nameInput.getText().toString());
-					array.get(index).setSymptoms(descriptionInput.getText().toString());
+					defectList.get(index).setName(nameTextField.getText());
+					defectList.get(index).setSymptoms(descriptionTextField.getText());
 					
 					if (closed == true) {
 						
-						array.get(index).setStatus("Closed");
+						defectList.get(index).setStatus("Closed");
 						
 					}
 					else {
 						
-						array.get(index).setStatus("Open");
+						defectList.get(index).setStatus("Open");
 						
 					}
 					
@@ -369,7 +369,7 @@ public class DefectViewController {
 					
 					
 					DefectLogViewController control = fxmlLoader.getController();
-					control.setArray(array);
+					control.setDefectList(defectList);
 					control.SetUserDefectLog(currentID);
 					control.SetUserDefectLog(currentID);
 					
@@ -402,24 +402,24 @@ public class DefectViewController {
 		
 		DefectLogViewController control = fxmlLoader.getController();
 		
-		for (int i = 0; i < array.size(); i++) {
+		for (int i = 0; i < defectList.size(); i++) {
 			
-			if (defectComboBox.getValue().toString().equals(array.get(i).getName())) {
+			if (defectComboBox.getValue().toString().equals(defectList.get(i).getName())) {
 				
-				array.remove(i);
+				defectList.remove(i);
 				break;
 				
 			}
 			
 		}
 		
-		control.setEffort(effort);
-		control.setArray(array);
+		control.setEffortList(effortList);
+		control.setDefectList(defectList);
 		control.SetUserDefectLog(currentID);
 		
-		statusText.setText("Status: Closed");
-		nameInput.clear();
-		descriptionInput.clear();
+		statusLabel.setText("Status: Closed");
+		nameTextField.clear();
+		descriptionTextField.clear();
 		injectComboBox.setValue(null);
 		removeComboBox.setValue(null);
 		categoryComboBox.setValue(null);
@@ -437,8 +437,8 @@ public class DefectViewController {
 		stage.setTitle("EffortLogger V2");
 		
 		EffortLoggerConsoleController control = fxmlLoader.getController();
-		control.setList(effort);
-		control.setDefectList(array);
+		control.setList(effortList);
+		control.setDefectList(defectList);
 		control.SetUserEffortLoggerConsole(currentID);
 		
 		stage.setScene(scene);
@@ -453,9 +453,9 @@ public class DefectViewController {
 			edit = true;
 			String toedit = defectComboBox.getValue();
 			
-			for (int i = 0; i < array.size(); i++) {
+			for (int i = 0; i < defectList.size(); i++) {
 				
-				if(toedit.equals(array.get(i).getName())) {
+				if(toedit.equals(defectList.get(i).getName())) {
 					
 					index = i;
 					break;

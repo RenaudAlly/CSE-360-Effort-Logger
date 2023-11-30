@@ -22,15 +22,14 @@ public class PlanningPokerController {
 	private Scene scene;
 	private Parent root;
 	
-	@SuppressWarnings("unused")
 	private ArrayList<Effort> effortList = new ArrayList<Effort>();
-	@SuppressWarnings("unused")
 	private ArrayList<Defect> defectList = new ArrayList<Defect>();
 
 	@FXML
 	private Button generateUserStory, submitValueButton, returnToEffortLoggerButton;
 	
-	private final Label storyBoardText = new Label();
+	@FXML
+	private Label storyBoardLabel;	
 	
 	@FXML
 	private TextField textEntry;
@@ -46,16 +45,19 @@ public class PlanningPokerController {
 	
 	
 	private static int averageForFib;
+	private int userNumberOfEfforts;
+	private int userNumberOfDefects;
+	
 	ID currentID = new ID();
-	Defect defects = new Defect();
-	Effort effort = new Effort();
 	
 	public void SetEffortList(ArrayList<Effort> newList) {
 		effortList = newList;
+		userNumberOfEfforts = effortList.size();
 	}
 	
 	public void SetDefectList(ArrayList<Defect> newList) {
 		defectList = newList;
+		userNumberOfDefects = defectList.size();
 	}
 	
 	public void SetUserPlanningPoker(ID newID) {
@@ -63,8 +65,8 @@ public class PlanningPokerController {
 		//defects = newDefect;
 		//effort = newEffort;
 		
-		historicalDefetcsPlanningPoker.setText(currentID.getUser()+ "'s Historical Defect Data: ");
-		historicalEffortPlanningPoker.setText(currentID.getUser()+ "'s Historical Effort Data: ");
+		historicalDefetcsPlanningPoker.setText(currentID.getUser()+ "'s Number of Defects: ");
+		historicalEffortPlanningPoker.setText(currentID.getUser()+ "'s Number of Efforts: ");
 	}
 	
 	public void GoToLogginScreen(ActionEvent event) throws IOException {
@@ -76,7 +78,7 @@ public class PlanningPokerController {
 		stage.show();
 }
 	public void DisplayNewStory(ActionEvent event) {
-		final String[] Stories = {
+		String[] Stories = {
 				  "As a user, I want a search functionality to find similar projects by using keywords so that I can quickly identify relevant past experiences for reference during planning and not have a bubble sort going on in the background to determine which projects to show."
 				, "As a developer, I want to be able to search for similar projects in my historical data using project attributes, such as size, complexity and technology used so that I can show them during planning poker sessions as evidence behind my chosen estimate."
 				, "As a project manager, I want a more versatile search function that allows me to set additional fields for advanced searching essentially. This would make it so that I can find projects for a desired industry domain, customer type and project duration which would be helpful insights for me."
@@ -90,11 +92,11 @@ public class PlanningPokerController {
 		};
 		int randVal = (int)(10 * Math.random());
 		
-		while (Stories[randVal].equals(storyBoardText.getText())) {
+		while (Stories[randVal].equals(storyBoardLabel.getText())) {
 			randVal = (int)(10 * Math.random());
 		}
 		
-		storyBoardText.setText(Stories[randVal]);
+		storyBoardLabel.setText(Stories[randVal]);
 	}
 	
 	private static boolean isFib(String x) { 
@@ -131,7 +133,9 @@ public class PlanningPokerController {
 
 		try {
 			SetUserPlanningPoker(currentID);
-			
+			historicalDefetcsPlanningPoker.setText(currentID.getUser()+ "'s Number of Defects: " + userNumberOfDefects);
+			historicalEffortPlanningPoker.setText(currentID.getUser()+ "'s Number of Efforts: " + userNumberOfEfforts);
+	
 			
 			String styleOption = planningPokerStyleButton.getText();
 			String input = textEntry.getText();
@@ -156,7 +160,6 @@ public class PlanningPokerController {
 				int i = (int)(10*Math.random());
 				i = randomOneTen[i];
 				average = average + i ;
-				historicalEffortPlanningPoker.setText(historicalEffortPlanningPoker.getText() + Integer.toString(i));
 
 				user1Text.setText("User 1: " + Integer.toString(i)); 
 				i = (int)(10*Math.random());
@@ -189,8 +192,6 @@ public class PlanningPokerController {
 				
 				int i = (int)(fib.length*Math.random());
 				average = average + i;
-				historicalEffortPlanningPoker.setText(historicalEffortPlanningPoker.getText() + fib[i]);
-
 				
 				user1Text.setText("User 1: " + fib[i]); 
 				i = (int)(fib.length*Math.random());

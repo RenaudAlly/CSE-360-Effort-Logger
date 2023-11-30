@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,19 +18,17 @@ import javafx.stage.Stage;
 
 public class EffortLogController {
 	@FXML
-    private TableView<Effort> projectLog;
+    private TableView<Effort> projectLogTable;
     @FXML
-    private TableColumn<Effort, String> effortCategory;
+    private TableColumn<Effort, String> effortCategoryColumn;
     @FXML
-    private TableColumn<Effort, String> lifeCycle;
+    private TableColumn<Effort, String> lifeCycleColumn;
     @FXML
-    private TableColumn<Effort, String> plan;
+    private TableColumn<Effort, String> planColumn;
     @FXML
-    private TableColumn<Effort, String> projectName;
+    private TableColumn<Effort, String> projectNameColumn;
     @FXML
-    private TableColumn<Effort, String> time;
-    @FXML
-    private Button effortLoggerConsoleButton, projectAssembler, projectRemove;
+    private TableColumn<Effort, String> timeColumn;
     @FXML
     private Stage stage;
     @FXML
@@ -50,14 +47,14 @@ public class EffortLogController {
     public void setList(ArrayList<Effort> newList) {
 		effortList = newList;
 	
-		time.setCellValueFactory(new PropertyValueFactory<Effort, String>("timeLogged"));
-		projectName.setCellValueFactory(new PropertyValueFactory<Effort, String>("projectName"));
-    	lifeCycle.setCellValueFactory(new PropertyValueFactory<Effort, String>("lifeCycle"));
-    	plan.setCellValueFactory(new PropertyValueFactory<Effort, String>("plan"));
-    	effortCategory.setCellValueFactory(new PropertyValueFactory<Effort, String>("effortCategory"));
+		timeColumn.setCellValueFactory(new PropertyValueFactory<Effort, String>("timeLogged"));
+		projectNameColumn.setCellValueFactory(new PropertyValueFactory<Effort, String>("projectName"));
+		lifeCycleColumn.setCellValueFactory(new PropertyValueFactory<Effort, String>("lifeCycle"));
+    	planColumn.setCellValueFactory(new PropertyValueFactory<Effort, String>("plan"));
+    	effortCategoryColumn.setCellValueFactory(new PropertyValueFactory<Effort, String>("effortCategory"));
     	
     	ObservableList<Effort> olist = FXCollections.observableArrayList(effortList);
-    	projectLog.setItems(olist);
+    	projectLogTable.setItems(olist);
 	}
     
     public void setDefect(ArrayList<Defect> array) {

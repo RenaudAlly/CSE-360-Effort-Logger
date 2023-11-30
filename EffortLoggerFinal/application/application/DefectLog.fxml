@@ -9,15 +9,15 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="750.0"  xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.DefectLogViewController">
    <children>
-      <TableView fx:id="defectLog" layoutX="22.0" layoutY="68.0" prefHeight="415.0" prefWidth="711.0">
+      <TableView fx:id="defectLogTable" layoutX="22.0" layoutY="68.0" prefHeight="415.0" prefWidth="711.0">
         <columns>
-          	<TableColumn fx:id="defectName" prefWidth="99.19997787475586" text="Defect Name" />
-          	<TableColumn fx:id="defectCategory" prefWidth="106.4000244140625" text="Defect Category" />
-            <TableColumn fx:id="project" prefWidth="60.00006103515625" text="Project" />
-            <TableColumn fx:id="injectStep" prefWidth="75.0" text="Inject Step" />
-            <TableColumn fx:id="removeStep" prefWidth="89.60003662109375" text="Remove Step" />
-            <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
-            <TableColumn fx:id="defectSymptoms" prefWidth="198.40005493164062" text="Defect Symptoms" />
+          	<TableColumn fx:id="defectNameColumn" prefWidth="99.19997787475586" text="Defect Name" />
+          	<TableColumn fx:id="defectCategoryColumn" prefWidth="106.4000244140625" text="Defect Category" />
+            <TableColumn fx:id="projectColumn" prefWidth="60.00006103515625" text="Project" />
+            <TableColumn fx:id="injectStepColumn" prefWidth="75.0" text="Inject Step" />
+            <TableColumn fx:id="removeStepColumn" prefWidth="89.60003662109375" text="Remove Step" />
+            <TableColumn fx:id="statusColumn" prefWidth="75.0" text="Status" />
+            <TableColumn fx:id="defectSymptomsColumn" prefWidth="198.40005493164062" text="Defect Symptoms" />
         </columns>
       </TableView>
       <Button layoutX="22.0" layoutY="32.0" mnemonicParsing="false" onAction="#ReturnOnAction" text="Defect Console" />

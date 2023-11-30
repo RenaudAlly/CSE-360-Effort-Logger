@@ -213,8 +213,8 @@ public class EffortLoggerConsoleController {
         scene = new Scene(root);
         
         DefectViewController controller = loader.getController();
-        controller.setEffort(effortList);
-        controller.setArray(defectList);
+        controller.setEffortList(effortList);
+        controller.setDefectList(defectList);
         controller.SetUserDefectConsole(currentID);
         
         stage.setScene(scene);
@@ -265,8 +265,8 @@ public class EffortLoggerConsoleController {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("DefectLog.fxml"));
         Parent root = loader.load();
         DefectLogViewController controller = loader.getController();
-        controller.setEffort(effortList);
-        controller.setArray(defectList);
+        controller.setEffortList(effortList);
+        controller.setDefectList(defectList);
         controller.SetUserDefectLog(currentID);
         
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
