@@ -8,7 +8,12 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.time.DayOfWeek;
 
 
 public class SignUpViewController {
@@ -37,29 +42,28 @@ public class SignUpViewController {
 		
 			String level = comboBoxInput.getValue().toString();
 		
-			if (level == "Guest") {
+			if (level.equals("Guest")) {
 				
 				newuser.setLevel(0);
 				
 			}
-			else if (level == "Developer") {
+			else if (level.equals("Developer")) {
 				
 				newuser.setLevel(1);
 				
 			}
-			else if (level == "First-Level Supervisor") {
-				
+			else if (level.equals("First Level Supervisor")) {
 				newuser.setLevel(2);
 				
 			}
 			else {
-				
+
 				newuser.setLevel(0);
 				
 			}
 			
 			// Adds created user to a CSV file which contains all the valid users
-			System.out.println(newuser.toString());
+			addUser(newuser);
 			
 		}
 		
@@ -74,4 +78,16 @@ public class SignUpViewController {
 		
 	}
 
+	public void addUser(ID newUser) {
+		// Using FileWriter for the append functionality offered when calling write() method
+		try {
+			File csvUsersListFile = new File("Users_List.csv");
+			FileWriter fw = new FileWriter(csvUsersListFile, true);
+			fw.write(newUser.toString() + "\n");
+			fw.close();
+		}
+		catch(IOException e) {
+			System.out.println("Unexpeced error occurred while writing to users list.");
+		}
+	}
 }

@@ -11,8 +11,12 @@ import javafx.fxml.FXMLLoader;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.channels.NonWritableChannelException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class LoginViewController {
@@ -22,6 +26,7 @@ public class LoginViewController {
 	private ID currentID = new ID();
 	private ArrayList<Effort> effortList = new ArrayList<Effort>();
 	private ArrayList<Defect> defectList = new ArrayList<Defect>();
+	private ArrayList<ID> usersArrayList = new ArrayList<ID>();
 	
 	@FXML
 	private TextField usernameInput;
@@ -45,6 +50,10 @@ public class LoginViewController {
 	}
 	
 	public void SignUpButtonOnAction(ActionEvent event) throws IOException {
+		// TODO: WARNING that we are assuming user names are unique
+		// Populates the users from the Users_List.csv file
+		usersArrayList = importValidUsersList();
+				
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SignUpScreen.fxml"));
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(fxmlLoader.load(), 750, 500);
@@ -57,45 +66,43 @@ public class LoginViewController {
 	public void LogInButtonOnAction(ActionEvent event) throws IOException {
 		
 		// first hard-coded credential
-		ID userid = new ID();
-		userid.setUser("adam");
-		userid.setPass("bonnet");
-		userid.setLevel(2);
-					
+		ID adam = new ID();
+		adam.setUser("adam");
+		adam.setPass("bonnet");
+		adam.setLevel(2);
+		usersArrayList.add(adam);
+			
 		// second hard-coded credential
-		ID userid2 = new ID();
-		userid2.setUser("matt");
-		userid2.setPass("wang");
-		userid2.setLevel(2);
-					
+		ID matt = new ID();
+		matt.setUser("matt");
+		matt.setPass("wang");
+		matt.setLevel(2);
+		usersArrayList.add(matt);
+			
 		// third hard-coded credential
-		ID userid3 = new ID();
-		userid3.setUser("arjun");
-		userid3.setPass("khetan");
-		userid3.setLevel(1);
-		
+		ID arjun = new ID();
+		arjun.setUser("arjun");
+		arjun.setPass("khetan");
+		arjun.setLevel(1);
+		usersArrayList.add(arjun);
+
 		// third hard-coded credential
-		ID userid4 = new ID();
-		userid4.setUser("sawyer");
-		userid4.setPass("kesti");
-		userid4.setLevel(2);
-		
+		ID sawyer = new ID();
+		sawyer.setUser("sawyer");
+		sawyer.setPass("kesti");
+		sawyer.setLevel(2);
+		usersArrayList.add(sawyer);
+
 		// third hard-coded credential
-		ID userid5 = new ID();
-		userid5.setUser("meshach");
-		userid5.setPass("samuel");
-		userid5.setLevel(0);
-		
+		ID sam = new ID();
+		sam.setUser("meshach");
+		sam.setPass("samuel");
+		sam.setLevel(0);
+		usersArrayList.add(sam);
+
+		// tracks user inputted details
 		ID useridfinal = new ID();
-				
-		// the array of credentials
-		ArrayList<ID> usersArrayList = new ArrayList<ID>();
-		usersArrayList.add(userid);
-		usersArrayList.add(userid2);
-		usersArrayList.add(userid3);
-		usersArrayList.add(userid4);
-		usersArrayList.add(userid5);
-//		ID[] arr = new ID[]{userid, userid2, userid3, userid4, userid5};
+	
 		// save the username input and password input to string
 		String username = usernameInput.getText().toString();
 		String password = passwordInput.getText().toString();
@@ -115,7 +122,6 @@ public class LoginViewController {
 			boolean found = false;
 			
 			boolean perm = false;
-			
 			// for all elements in the array
 			for (int i = 0; i < 5; i++) {
 				
@@ -223,6 +229,41 @@ public class LoginViewController {
 			System.out.println("We cold not find the effort or defect log CSV files in your current directory. Skill issue.");
 		}
 
+	}
+	
+	public ArrayList<ID> importValidUsersList() {
+		// Reading user login information from the CSV file
+		ArrayList<ID> usersList = new ArrayList<ID>();
+		try {
+			File csvUsersListFile = new File("Users_List.csv");
+			
+			// To account for the case where the user has no users list file, we offer a default login
+			if (!csvUsersListFile.exists()) {
+				FileWriter fw = new FileWriter(csvUsersListFile);
+				fw.write("Username,Password,Level\n");
+				fw.write("test,test,2\n");
+				fw.close();
+			}
+			
+			Scanner sc = new Scanner(csvUsersListFile);
+			sc.nextLine();
+			while (sc.hasNextLine()) {
+				String[] userLoginInfoOuptutStrings = sc.nextLine().split(",");
+				usersList.add(new ID(userLoginInfoOuptutStrings[0], userLoginInfoOuptutStrings[1],
+						Integer.parseInt(userLoginInfoOuptutStrings[2])));
+			}
+			sc.close();
+		}
+		catch (NoSuchElementException e) {
+			System.out.println("It appears that your users list file may be empty.");
+		} catch(FileNotFoundException e) {
+			System.out.println("Please try to make a Users_List.csv with login info."); 
+		} catch (IOException e) {
+			System.out.println("An unexpected error occurred when trying to read from users list.");
+		}
+		
+		// Finished populating the valid users list
+		return usersList;
 	}
 	
 }

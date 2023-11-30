@@ -14,9 +14,15 @@ public class ID {
 		
 	}
 	
+	public ID(String user, String pass, int level) {
+		this.user = user;
+		this.pass = pass;
+		this.level = level;
+	}
+	
 	@Override
 	public String toString() {
-		return user + "," + pass + "," + String.valueOf(level);
+		return this.user + "," + this.pass + "," + String.valueOf(level);
 	}
 	
 	public String getUser() {
