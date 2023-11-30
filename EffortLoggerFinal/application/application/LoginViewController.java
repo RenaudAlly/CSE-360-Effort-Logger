@@ -65,6 +65,8 @@ public class LoginViewController {
 	
 	public void LogInButtonOnAction(ActionEvent event) throws IOException {
 		
+		usersArrayList = importValidUsersList();
+		
 		// first hard-coded credential
 		ID adam = new ID();
 		adam.setUser("adam");
