@@ -21,20 +21,22 @@ public class PlanningPokerController {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	
+	@SuppressWarnings("unused")
 	private ArrayList<Effort> effortList = new ArrayList<Effort>();
+	@SuppressWarnings("unused")
 	private ArrayList<Defect> defectList = new ArrayList<Defect>();
 
 	@FXML
 	private Button generateUserStory, submitValueButton, returnToEffortLoggerButton;
 	
-	@FXML
-	private Label storyBoardText;
+	private final Label storyBoardText = new Label();
 	
 	@FXML
-	TextField textEntry;
+	private TextField textEntry;
 	
 	@FXML
-	MenuButton planningPokerStyleButton;
+	private MenuButton planningPokerStyleButton;
 	
 	@FXML
 	private Text user1Text, user2Text, user3Text, user4Text, user5Text;
@@ -74,7 +76,7 @@ public class PlanningPokerController {
 		stage.show();
 }
 	public void DisplayNewStory(ActionEvent event) {
-		String[] Stories = {
+		final String[] Stories = {
 				  "As a user, I want a search functionality to find similar projects by using keywords so that I can quickly identify relevant past experiences for reference during planning and not have a bubble sort going on in the background to determine which projects to show."
 				, "As a developer, I want to be able to search for similar projects in my historical data using project attributes, such as size, complexity and technology used so that I can show them during planning poker sessions as evidence behind my chosen estimate."
 				, "As a project manager, I want a more versatile search function that allows me to set additional fields for advanced searching essentially. This would make it so that I can find projects for a desired industry domain, customer type and project duration which would be helpful insights for me."
@@ -96,7 +98,7 @@ public class PlanningPokerController {
 	}
 	
 	private static boolean isFib(String x) { 
-		String[] fib = {
+		final String[] fib = {
 				"0"
 				,"1/2"
 				,"1"

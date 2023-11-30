@@ -2,8 +2,6 @@ package application;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Arrays;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,8 +36,6 @@ public class EffortLogController {
     private Stage stage;
     @FXML
     private Scene scene;
-    
-    private Effort e;
     
     private ID currentID = new ID();
     
