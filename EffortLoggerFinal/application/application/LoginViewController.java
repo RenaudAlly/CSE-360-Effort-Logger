@@ -125,7 +125,7 @@ public class LoginViewController {
 			
 			boolean perm = false;
 			// for all elements in the array
-			for (int i = 0; i < 5; i++) {
+			for (int i = 0; i < usersArrayList.size(); i++) {
 				
 				// if the username password combo is in this element of the array
 				if (username.equals(usersArrayList.get(i).getUser()) && password.equals(usersArrayList.get(i).getPass())) {
